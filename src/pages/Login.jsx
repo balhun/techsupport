@@ -2,11 +2,10 @@ import { InputAdornment, InputLabel, OutlinedInput, Stack } from "@mui/material"
 import { useState } from "react";
 
 export default function Login(){
+    /*
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    return(
-        <div>
-        <Stack>
+            <Stack>
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                 <OutlinedInput
@@ -31,6 +30,15 @@ export default function Login(){
                 />
            </FormControl>
         </Stack>
-        </div>
+
+        Hunor:
+        Ide egyszerű MUI-s textfieldek elegek szerintem
+        Tökre adnám ha középen baloldalt login tőle jobbra pedig regisztráció lenne
+        stylehoz guglizd a tailwindet, "amit akarsz csinálni + tailwind" googlebe és egyből megvan a válaszod
+        Mit gondolsz?
+
+    */
+    return(
+        <div className='text-white text-center'>Login Page</div>
     )
 }

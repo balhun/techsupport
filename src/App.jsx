@@ -1,20 +1,26 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Menu from "./Menu"
-import Login from "./Login.jsx"
-import Ticket from "./Ticket.jsx"
+import Layout from "./Layout.jsx";
+import Home from "./pages/Home.jsx";
+import MyTickets from "./pages/MyTickets.jsx";
+import Login from "./pages/Login.jsx";
+import OpenTicket from "./pages/OpenTicket.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
 
   const router = createBrowserRouter([
-    { path: "/", element: <Menu />, children: [
-      { path: "/ticket", element: <Ticket /> },
-      { path: "/login", element: <Login /> }
+    { path: "/", element: <Layout />, children: [
+      { path: "/", element: <Home /> },
+      { path: "/mytickets", element: <MyTickets /> },
+      { path: "/login", element: <Login /> },
+      { path: "/openticket", element: <OpenTicket /> },
+      { path: "/profile", element: <Profile /> }
     ]}
   ]);
+  
   return (
     <div>
       <RouterProvider router={router}/>
-      <h1 className='text-white text-center text-2xl mt-5'>Hello World</h1>
     </div>
   )
 }
