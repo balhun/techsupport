@@ -5,6 +5,7 @@ import MyTickets from "./pages/MyTickets.jsx";
 import Login from "./pages/Login.jsx";
 import OpenTicket from "./pages/OpenTicket.jsx";
 import Profile from "./pages/Profile.jsx";
+import Regist from "./pages/Regist.jsx";
 
 function App() {
 
@@ -14,7 +15,8 @@ function App() {
       { path: "/mytickets", element: <MyTickets /> },
       { path: "/login", element: <Login /> },
       { path: "/openticket", element: <OpenTicket /> },
-      { path: "/profile", element: <Profile /> }
+      { path: "/profile", element: <Profile /> },
+      {path:"/regist", element:<Regist/>}
     ]}
   ]);
   
