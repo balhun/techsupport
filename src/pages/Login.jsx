@@ -24,15 +24,16 @@ export default function Login(){
         // nemtudom a faszom roviditesekt elkezdtem egz regist panelt is ahonnan majd mennek a firebasebe a cuccok
     
     return(
-        <div className='text-white text-center fit-content'>Login Page
-            <div className='width 90% bg-white flex flex-col '>
-                
+        <div className='text-center'>Login Page
+            <div className=' w-9/12 bg-white flex flex-col  m-0 m-auto '>
+                <div className=" content-center">
                         <TextField
                         sx={{ m: 1, width: '25ch' }}
                         required
                         label="Email"
                         />
-                    
+                </div>
+                <div className="content-center">
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
@@ -56,9 +57,10 @@ export default function Login(){
                             label="Password"
                             />
                         </FormControl>
+                        </div>
                         <Link to="/profile"><Button variant="contained">Login</Button></Link>
                         <p className="text-black">Nem vagy regisztralva?</p>
-                        <p className="text-blue"><Link to='/regist'>Kattints ide</Link></p>
+                        <Link to='/regist'>Kattints ide</Link>
                         
                     
             </div>
