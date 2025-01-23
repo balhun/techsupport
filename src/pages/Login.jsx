@@ -21,10 +21,10 @@ export default function Login(){
         // nemtudom a faszom roviditesekt elkezdtem egz regist panelt is ahonnan majd mennek a firebasebe a cuccok
     
     return(
-        <div className='text-center p-3  justify-evenly flex flex-row'>
-            <div className=' rounded-lg bg-gray-800 flex flex-col p-3  m-0 w-fit'>
+        <div className='text-center p-3  justify-evenly flex flex-col md:items-start items-center  md:flex-row'>
+            <div className=' rounded-lg bg-gray-800 flex flex-col p-3  m-0 w-fit hover:shadow-2xl hover:shadow-slate-700'>
                 <h1>Sign in</h1>
-                <div className=" content-center">
+                <div className=" content-center ">
                         <TextField
                             sx={{ m: 1, width: '35ch', 
                                 '& .MuiOutlinedInput-root': {
@@ -46,7 +46,7 @@ export default function Login(){
                             label="Email"
                         />
                 </div>
-                <div className="content-center">
+                <div className="content-center ">
                     <FormControl sx={{ m: 1, width: '35ch', 
                                 '& .MuiOutlinedInput-root': {
                                   '& fieldset': {
@@ -88,7 +88,7 @@ export default function Login(){
                         <Link className="w-fit m-auto" to="/profile"><Button variant="contained">Login</Button></Link>
                     
             </div>
-            <div className="rounded-lg bg-gray-800 flex flex-col p-3  m-0 w-fit">
+            <div className="rounded-lg bg-gray-800 hover:bg-slate-700 flex flex-col p-3  m-0 w-fit hover:shadow-2xl hover:shadow-slate-700">
                 <h1>Sign up</h1>
                 <div className=" content-center">
                         <TextField

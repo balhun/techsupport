@@ -9,7 +9,7 @@ export default function Layout() {
         <div>
             <Menu />
         </div>
-        <div>
+        <div >
             <Outlet />
         </div>
     </div>
