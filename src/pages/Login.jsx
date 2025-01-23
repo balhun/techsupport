@@ -26,25 +26,56 @@ export default function Login(){
                 <h1>Sign in</h1>
                 <div className=" content-center">
                         <TextField
-                            sx={{ m: 1, width: '35ch' }}
+                            sx={{ m: 1, width: '35ch', 
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': {
+                                    borderColor: 'white', // White outline
+                                  },
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: 'white', // White outline when focused
+                                  },
+                                },
+                                '& .MuiInputBase-input': {
+                                  color: 'white', // White text color
+                                },
+                                '& .MuiInputLabel-root': {
+                                  color: 'white', // White label color
+                                }
+                               }}
                             required
                             label="Email"
                         />
                 </div>
                 <div className="content-center">
-                    <FormControl sx={{ m: 1, width: '35ch' }} variant="outlined">
+                    <FormControl sx={{ m: 1, width: '35ch', 
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': {
+                                    borderColor: 'white', // White outline
+                                  },
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: 'white', // White outline when focused
+                                  },
+                                },
+                                '& .MuiInputBase-input': {
+                                  color: 'white', // White text color
+                                },
+                                '& .MuiInputLabel-root': {
+                                  color: 'white', // White label color
+                                } }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
-                                <InputAdornment position="end">
+                                <InputAdornment position="end" >
                                     <IconButton
+                                        sx={{ color: 'white' }}
                                         aria-label={showPassword ? 'hide the password' : 'display the password'}
                                         onClick={handleClickShowPassword}
                                         onMouseDown={handleMouseDownPassword}
                                         onMouseUp={handleMouseUpPassword}
                                         edge="end"
+                                        
                                     >
                                         {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
@@ -54,33 +85,75 @@ export default function Login(){
                             />
                         </FormControl>
                     </div>
-                        <Link to="/profile"><Button variant="contained">Login</Button></Link>
+                        <Link className="w-fit m-auto" to="/profile"><Button variant="contained">Login</Button></Link>
                     
             </div>
             <div className="rounded-lg bg-gray-800 flex flex-col p-3  m-0 w-fit">
                 <h1>Sign up</h1>
                 <div className=" content-center">
                         <TextField
-                            sx={{ m: 1, width: '35ch' }}
+                            sx={{ m: 1, width: '35ch', 
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': {
+                                    borderColor: 'white', // White outline
+                                  },
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: 'white', // White outline when focused
+                                  },
+                                },
+                                '& .MuiInputBase-input': {
+                                  color: 'white', // White text color
+                                },
+                                '& .MuiInputLabel-root': {
+                                  color: 'white', // White label color
+                                } }}
                             required
                             label="Nev"
                         />
                 </div>
                 <div className=" content-center">
                         <TextField
-                            sx={{ m: 1, width: '35ch' }}
+                            sx={{ m: 1, width: '35ch', 
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': {
+                                    borderColor: 'white', // White outline
+                                  },
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: 'white', // White outline when focused
+                                  },
+                                },
+                                '& .MuiInputBase-input': {
+                                  color: 'white', // White text color
+                                },
+                                '& .MuiInputLabel-root': {
+                                  color: 'white', // White label color
+                                } }}
                             required
                             label="Email"
                         />
                 </div>
                 <div className=" content-center">
                         <TextField
-                            sx={{ m: 1, width: '35ch' }}
+                            sx={{ m: 1, width: '35ch', 
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': {
+                                    borderColor: 'white', // White outline
+                                  },
+                                  '&.Mui-focused fieldset': {
+                                    borderColor: 'white', // White outline when focused
+                                  },
+                                },
+                                '& .MuiInputBase-input': {
+                                  color: 'white', // White text color
+                                },
+                                '& .MuiInputLabel-root': {
+                                  color: 'white', // White label color
+                                } }}
                             required
                             label="Password"
                         />
                 </div>
-                <Link to="/profile"><Button variant="contained">Register</Button></Link>
+                <Link className="w-fit m-auto" to="/profile"><Button variant="contained">Register</Button></Link>
             </div>
         </div>
     )
