@@ -1,9 +1,8 @@
 import { Stack, TextField, Button, Link, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
-import {signInWithEmailAndPassword, signInWithPopup} from "firebase/auth"
+import {signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
 import { GoogleAuthProvider } from "firebase/auth";
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 
 export default function Login({ auth, user }) {
 
@@ -12,22 +11,21 @@ export default function Login({ auth, user }) {
 
   const [loginError, setLoginError] = useState(false);
 
+  const [felhasznalonev, setFelhasznalonev] = useState('')
   const [newEmail, setNewEmail] = useState('')
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState(false);
-  
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
-/*<Alert severity="error">This is an error Alert.</Alert>*/
 
   async function login() {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       setLoginError(false);
       setEmail(""); setPassword("");
-      navigate("/profile", {replace:true});
+      
     } catch (error) {
       if (error.code == "auth/invalid-email") {
         setLoginError(true);
@@ -38,17 +36,32 @@ export default function Login({ auth, user }) {
   async function regist() {
     if (newPassword !== confirmPassword) {
       setError(true);
+      setErrorMessage("Nem egyezik a két jelszó!");
       return;
+    } else {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
+        const user = userCredential.user;
+        await updateProfile(user, {
+          displayName: felhasznalonev,
+          photoURL: "./blank-pfp.png"
+        });
+      } catch (err) {
+        if (felhasznalonev.length < 6) {
+          setError(true);
+          setErrorMessage("A nevednek legalább 6 karakterből kell állnia!");
+        } else if (err.code == "auth/invalid-email") {
+          setError(true);
+          setErrorMessage("Helytelen Email cím!");
+        } else if (err.code == "auth/weak-password") {
+          setError(true);
+          setErrorMessage("Jelszó legalább 6 karakterből álljon!");
+        } else if (err.code == "auth/email-already-in-use") {
+          setError(true);
+          setErrorMessage("Az Email cím már használt!");
+        }
+      }
     }
-    try {
-      await createUserWithEmailAndPassword(auth, newEmail, newPassword);
-      user.displayName = felhasznalonev;
-      setSuccess(true);
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-    
   };
 
   async function GoogleLogIn() {
@@ -80,7 +93,7 @@ export default function Login({ auth, user }) {
               onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
             />
             <Link href="/forgotpassword" sx={{textDecoration: "none", color: "#4b5563"}}>Elfelejtett jelszó</Link>
-            {loginError ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Hibásfelhasználónév vagy jelszó</Alert> : ""}
+            {loginError ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Hibás felhasználónév vagy jelszó</Alert> : ""}
             <Link to="/profile"><Button onClick={login} variant='contained' className='w-80'>Bejelentkezés</Button></Link>
             <p className="">--Or continue with--</p>
             <Link to="/profile" sx={{width:"320px"}}><img src="./google.png" className='flex m-auto cursor-pointer w-4/5' onClick={GoogleLogIn} alt="" /></Link>
@@ -90,10 +103,18 @@ export default function Login({ auth, user }) {
               <TextField
                 className='w-80 align-middle'
                 required
+                label="Felhasználónév"
+                variant='filled'
+                value={felhasznalonev}
+                onChange={e => { setFelhasznalonev(e.target.value); setError(false);}} 
+              />
+              <TextField
+                className='w-80 align-middle'
+                required
                 label="Email"
                 variant='filled'
                 value={newEmail}
-                onChange={e => setNewEmail(e.target.value)} 
+                onChange={e => {setNewEmail(e.target.value); setError(false);}} 
               />
               <TextField
                 className='w-80 align-middle'
@@ -102,7 +123,7 @@ export default function Login({ auth, user }) {
                 variant='filled'
                 type='password'
                 value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
+                onChange={e => {setNewPassword(e.target.value); setError(false);}}
               />
               <TextField
                 className='w-80 align-middle'
@@ -110,12 +131,11 @@ export default function Login({ auth, user }) {
                 type='password'
                 label="Jelszó megerősítés"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={e => {setConfirmPassword(e.target.value); setError(false);}}
                 variant='filled'
               />
-              {error ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Nem egyezik a két jelszó</Alert> : "" }
-              <Link to="/profile"><Button  variant='contained' className='w-80' onClick={regist}>Regisztrálás</Button></Link>
-              
+              {error ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>{errorMessage}</Alert> : "" }
+              <Button  variant='contained' className='w-80' onClick={regist}>Regisztrálás</Button>
           </Stack>
       </div>
       :
