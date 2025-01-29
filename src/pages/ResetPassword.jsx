@@ -8,11 +8,11 @@ export default function ResetPassword({auth}) {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handlePasswordReset = async () => {
+  const PasswordReset = async () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setSuccessMessage(
-        "Password reset email sent! Check your inbox or spam folder."
+        "Jelszó-visszaállítási e-mail elküldve! \r\n Ellenőrizze a beérkező leveleket vagy a spam mappát."
       );
       setErrorMessage("");
     } catch (error) {
@@ -22,10 +22,10 @@ export default function ResetPassword({auth}) {
   };
 
   return (
-    <Stack spacing={2} className="p-4 w-full max-w-md mx-auto">
-      <h1 className="text-2xl font-bold text-center">Forgot Password</h1>
+    <Stack spacing={2} className="p-4 w-full max-w-md mx-auto glowing island mt-5">
+      <h1 className="text-2xl font-bold text-center text-gray-800">Elfelejtett Jelszó</h1>
       <TextField
-        label="Email Address"
+        label="Email cím"
         type="email"
         variant="outlined"
         fullWidth
@@ -34,14 +34,7 @@ export default function ResetPassword({auth}) {
       />
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {successMessage && <p className="text-green-500">{successMessage}</p>}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handlePasswordReset}
-        disabled={!email}
-      >
-        Send Reset Email
-      </Button>
+      <Button variant="contained" color="primary" onClick={PasswordReset} disabled={!email}>Visszaállítási e-mail küldése</Button>
     </Stack>
   );
 }

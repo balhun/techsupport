@@ -31,8 +31,6 @@ export default function Profile({ user,auth,logout,setUser }) {
       try {
         setUploading(true);
         const cloudinaryResponse = await uploadFile(file);
-        
-       
           if (cloudinaryResponse && cloudinaryResponse.url) {
             const cloudinaryURL = cloudinaryResponse.url;
             await updateProfile(auth.currentUser, { photoURL: cloudinaryURL });
@@ -44,8 +42,6 @@ export default function Profile({ user,auth,logout,setUser }) {
           } else {
             throw new Error('Failed to get Cloudinary URL.');
           }
-
-        
       } catch (error) {
         console.error('Error updating profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
@@ -57,8 +53,6 @@ export default function Profile({ user,auth,logout,setUser }) {
     }
   };
   
-
-
   const SaveChanges = async () => {
     try {
       await updateProfile(auth.currentUser, { displayName: name });
@@ -79,11 +73,12 @@ export default function Profile({ user,auth,logout,setUser }) {
   return (
     <>
     {user ?
-    <div className="flex flex-col items-center justify-center min-h-screen  px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md md:max-w-lg space-y-6">
-        <Card className="rounded-2xl shadow-lg glowing">
+
+    <div className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+      <div >
+      <Card className="rounded-2xl shadow-lg glowing">
           <CardHeader
-            title="Your Profile"
+            title="Személyes adataid"
             className="text-lg font-semibold text-gray-800 border-b"
           />
           <CardContent>
@@ -96,7 +91,7 @@ export default function Profile({ user,auth,logout,setUser }) {
                     className="w-16 h-16 rounded-full border border-gray-300"
                   />
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Change Profile Picture</label>
+                    <label className="block text-sm font-medium text-gray-700">Profilkép csere</label>
                     <Button
                       component="label"
                       role={undefined}
@@ -114,17 +109,16 @@ export default function Profile({ user,auth,logout,setUser }) {
                         multiple
                       />
                     </Button>
-                    {uploading && <p className="text-sm text-blue-500">Uploading...</p>}
+                    {uploading && <p className="text-sm text-blue-500">Feltőltés...</p>}
                   </div>
                 </div>
-                
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
+                  <label className="block text-sm font-medium text-gray-700">Név</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your name"
+                    placeholder="Felhasználónév"
                     className="w-full mt-1 p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -140,17 +134,17 @@ export default function Profile({ user,auth,logout,setUser }) {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Change Password</label>
+                  <label className="block text-sm font-medium text-gray-700">Jelszó csere</label>
                   <input
                     type="password"
-                    placeholder="Enter current password"
+                    placeholder="Jelenlegi jelszó"
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     className="w-full mt-1 p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="password"
-                    placeholder="Enter new password"
+                    placeholder="Új jelszó"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     className="w-full mt-2 p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -158,20 +152,22 @@ export default function Profile({ user,auth,logout,setUser }) {
                 </div>
 
                 <Button
-                  className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                  className="w-full bg-blue-500 py-2 rounded-lg hover:bg-blue-600 hover:text-white"
                   onClick={SaveChanges}
                 >
-                  Save Changes
+                Változtatások Mentés
                 </Button>
               </div>
             ) : (
-              <p className="text-gray-500">Please log in to view and edit your profile.</p>
+              <p className="text-gray-500">Kérjük, jelentkezzen be profilja megtekintéséhez és szerkesztéséhez.</p>
             )}
           </CardContent>
         </Card>
+      </div>
+      <div className="w-full max-w-md md:max-w-lg space-y-6">
         <Card className="rounded-2xl shadow-lg mt-6 glowing">
           <CardHeader
-            title="Messages"
+            title="Nyitott és lezárt ügyeid"
             className="text-lg font-semibold text-gray-800 border-b"
           />
           <CardContent>

@@ -23,12 +23,10 @@ export default function RespMenu({ user, setUser, logout }) {
     setAnchorEl(null);
   }
 
-  console.log(user)
-
   return (
     <Stack
       direction="row"
-      className="flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75 relative"
+      className="flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75 relative menubar"
     >
       {isSmallScreen ? (
         <>
@@ -46,12 +44,12 @@ export default function RespMenu({ user, setUser, logout }) {
           >
             <Link to="/" className="text-white">
               <MenuItem onClick={handleClose} selected={pathname === '/'} className="hover:bg-gray-700">
-                <HomeIcon className="mr-2" />Home
+                <HomeIcon className="mr-2" />Főoldal
               </MenuItem>
             </Link>
             <Link to="/openticket" className="text-white">
               <MenuItem onClick={handleClose} selected={pathname === '/openticket'} className="hover:bg-gray-700">
-                <SupportIcon className="mr-2" />Open a Ticket
+                <SupportIcon className="mr-2" />Ügyfélszolgálat
               </MenuItem>
             </Link>
             <Divider sx={{ my: 1, backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
@@ -64,7 +62,7 @@ export default function RespMenu({ user, setUser, logout }) {
             (
               <Link to="/login" className="text-white">
                 <MenuItem onClick={handleClose} selected={pathname === '/login'} className="hover:bg-gray-700">
-                  <LoginIcon className="mr-2" /> Log in
+                  <LoginIcon className="mr-2" />Bejelentkezés
                 </MenuItem>
               </Link>
             )}
@@ -73,13 +71,13 @@ export default function RespMenu({ user, setUser, logout }) {
       ) : (
         <Stack direction="row" gap={1}>
           <ButtonGroup variant="outlined">
-            <Link to="/"><Button variant={pathname === '/' ? 'outlined' : 'contained'}>Home</Button></Link>
-            <Link to="/openticket"><Button variant={pathname === '/openticket' ? 'outlined' : 'contained'}>Open a Ticket</Button></Link>
+            <Link to="/"><Button variant={pathname === '/' ? 'outlined' : 'contained'}>Főoldal</Button></Link>
+            <Link to="/openticket"><Button variant={pathname === '/openticket' ? 'outlined' : 'contained'}>Ügyfélszolgálat</Button></Link>
           </ButtonGroup>
         </Stack>
       )}
       {/* <div className='absolute top-0 left-0 flex justify-center items-center'> */}
-        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isSmallScreen ? 'text-xl' : ''}`}>Welcome to Technical Support™</h1>
+        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>Technikai támogatás™</h1>
       {/* </div> */}
       <Stack direction="row" gap={2} alignItems="center">
         {user ? (

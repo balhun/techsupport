@@ -1,11 +1,11 @@
 import { Stack, TextField, Button, Link, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
-import {signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
+import {signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signOut} from "firebase/auth"
 import { GoogleAuthProvider } from "firebase/auth";
 import Passwordshow from '../Componens/Passwordshow';
 
-export default function Login({ auth, user }) {
+export default function Login({ auth, user, logout, successRegist, setSuccessRegist }) {
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -32,7 +32,7 @@ export default function Login({ auth, user }) {
         setLoginError(true);
         
       }else if(error.code=="auth/invalid-credential"){
-          setLoginError(true);
+        setLoginError(true);
       }
     }
   }
@@ -41,14 +41,18 @@ export default function Login({ auth, user }) {
     if (newPassword !== confirmPassword) {
       setError(true);
       setErrorMessage("Nem egyezik a két jelszó!");
-      return;
     } else {
       try {
+        setSuccessRegist(false);
         const userCredential = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
-        const user = userCredential.user;
-        await updateProfile(user, {
-          displayName: felhasznalonev,
-          photoURL: "./blank-pfp.png"
+        .then(async (res) => {
+          const user = userCredential.user;
+          await updateProfile(user, {
+            displayName: felhasznalonev,
+            photoURL: "./blank-pfp.png"
+          });
+          logout();
+          setSuccessRegist(true);
         });
       } catch (err) {
         if (felhasznalonev.length < 6) {
@@ -87,15 +91,6 @@ export default function Login({ auth, user }) {
               value={loginEmail}
               onChange={e=> { setLoginEmail(e.target.value); setLoginError(false)}}
             />
-            {/* <TextField
-              type='password'
-              className='w-80 align-middle'
-              required
-              label="Jelszó"
-              variant='filled'
-              value={loginPassword}
-              onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
-            /> */}
             <Passwordshow
               value={loginPassword}
               onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
@@ -125,35 +120,17 @@ export default function Login({ auth, user }) {
                 value={newEmail}
                 onChange={e => {setNewEmail(e.target.value); setError(false);}} 
               />
-              { /*<TextField
-                className='w-80 align-middle'
-                required
-                label="Jelszó"
-                variant='filled'
-                type='password'
-                value={newPassword}
-                onChange={e => {setNewPassword(e.target.value); setError(false);}}
-              />*/ }
               <Passwordshow 
                 value={newPassword}
                 onChange={e => {setNewPassword(e.target.value); setError(false);}}
                 label="Jelszó"
               />
-              {/* <TextField
-                className='w-80 align-middle'
-                required
-                type='password'
-                label="Jelszó megerősítés"
-                value={confirmPassword}
-                onChange={e => {setConfirmPassword(e.target.value); setError(false);}}
-                variant='filled'
-              /> */}
               <Passwordshow 
                 value={confirmPassword}
                 onChange={e => {setConfirmPassword(e.target.value); setError(false);}}
                 label="Jelszó megerősítés"
               />
-              {error ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>{errorMessage}</Alert> : "" }
+              {error ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>{errorMessage}</Alert> : successRegist ? <Alert severity="success" variant='filled' sx={{width: "320px"}}>Sikeres regisztráció!</Alert> : "" }
               <Button  variant='contained' className='w-80' onClick={regist}>Regisztrálás</Button>
           </Stack>
       </div>

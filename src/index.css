@@ -32,5 +32,9 @@ body {
     }
 }
 
+.menubar Button {
+    text-transform: none;
+}
+
 .island Button { text-transform: none; }
 
