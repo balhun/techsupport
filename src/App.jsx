@@ -38,7 +38,7 @@ function App() {
       { path: "/mytickets", element: <MyTickets /> },
       { path: "/login", element: <Login auth={auth} setUser={setUser} user={user} /> },
       { path: "/openticket", element: <OpenTicket /> },
-      { path: "/profile", element: <Profile user={user} auth={auth} /> },
+      { path: "/profile", element: <Profile user={user} auth={auth} logout={logout} /> },
       { path:"/forgotpassword", element: <ResetPassword auth={auth}/>}
     ]}
   ]);

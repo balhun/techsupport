@@ -27,8 +27,11 @@ export default function Profile({ user }) {
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader,Button } from '@mui/material';
 import { updateProfile, updatePassword, onAuthStateChanged } from 'firebase/auth';
+import { Navigate } from 'react-router-dom';
+import { uploadFile } from '../Uploadfile';
 
-export default function Profile({ user,auth }) {
+
+export default function Profile({ user,auth,logout }) {
   const [profilePicture, setProfilePicture] = useState('./blank-pfp.png');
   const [uploading, setUploading] = useState(false);
   const [name, setName] = useState('');
@@ -49,31 +52,30 @@ export default function Profile({ user,auth }) {
   }, [auth]);
 
   const ProfilePictureChange = async (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0]; 
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        try {
-          setUploading(true);
-          const photoURL = reader.result;
-
-          if (photoURL.length < 1024 * 16) { 
-            await updateProfile(auth.currentUser, { photoURL });
-            setProfilePicture(photoURL);
-            alert('Profile picture updated successfully!');
-          } else {
-            alert('Profile picture size is too large. Please use a smaller image.');
-          }
-        } catch (error) {
-          console.error('Error updating profile picture:', error);
-          alert('Failed to update profile picture. Please try again.');
-        } finally {
-          setUploading(false);
+      try {
+        setUploading(true);
+        const cloudinaryResponse = await uploadFile(file);
+  
+        if (cloudinaryResponse && cloudinaryResponse.url) {
+          const cloudinaryURL = cloudinaryResponse.url;
+          await updateProfile(auth.currentUser, { photoURL: cloudinaryURL });
+          setProfilePicture(cloudinaryURL);
+          alert('Profile picture updated successfully!');
+        } else {
+          throw new Error('Failed to get Cloudinary URL.');
         }
-      };
-      reader.readAsDataURL(file);
+      } catch (error) {
+        console.error('Error updating profile picture:', error);
+        alert('Failed to update profile picture. Please try again.');
+      } finally {
+        setUploading(false);
+      }
     }
   };
+  
+
 
   const SaveChanges = async () => {
     try {
@@ -83,6 +85,7 @@ export default function Profile({ user,auth }) {
       if (newPassword) {
         await updatePassword(auth.currentUser, newPassword);
         alert('Password updated successfully!');
+        logout()
       }
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -91,6 +94,8 @@ export default function Profile({ user,auth }) {
   };
 
   return (
+    <>
+    {user ?
     <div className="flex flex-col items-center justify-center min-h-screen  px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md md:max-w-lg space-y-6">
         <Card className="rounded-2xl shadow-lg glowing">
@@ -189,5 +194,7 @@ export default function Profile({ user,auth }) {
         </Card>
       </div>
     </div>
+    :<Navigate to="/login" replace/>}
+    </>
   );
 };

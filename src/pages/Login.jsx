@@ -29,6 +29,9 @@ export default function Login({ auth, user }) {
     } catch (error) {
       if (error.code == "auth/invalid-email") {
         setLoginError(true);
+        
+      }else if(error.code=="auth/invalid-credential"){
+          setLoginError(true);
       }
     }
   }
@@ -93,7 +96,7 @@ export default function Login({ auth, user }) {
               onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
             />
             <Link href="/forgotpassword" sx={{textDecoration: "none", color: "#4b5563"}}>Elfelejtett jelszó</Link>
-            {loginError ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Hibás felhasználónév vagy jelszó</Alert> : ""}
+            {loginError ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Hibás Email vagy jelszó</Alert> : ""}
             <Link to="/profile"><Button onClick={login} variant='contained' className='w-80'>Bejelentkezés</Button></Link>
             <p className="">--Or continue with--</p>
             <Link to="/profile" sx={{width:"320px"}}><img src="./google.png" className='flex m-auto cursor-pointer w-4/5' onClick={GoogleLogIn} alt="" /></Link>
