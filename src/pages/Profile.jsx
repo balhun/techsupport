@@ -1,77 +1,59 @@
-/*import React from 'react'
-
-export default function Profile({ user }) {
-  console.log(user);
-  return (
-    <div className='text-white text-center'>
-      { user ?
-        <span>
-          {user.email} {user.displayName} <br />
-          <img src={user.photoURL} className='m-auto' />
-        </span>
-        :
-        <span>Profile</span>
-      }
-      <div className="bg-white">
-          
-      </div>
-      <div className="bg-white">
-
-      </div>
-      </div>
-  )
-}
-*/
-
-
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader,Button } from '@mui/material';
-import { updateProfile, updatePassword, onAuthStateChanged } from 'firebase/auth';
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader,Button, styled } from '@mui/material';
+import { updateProfile, updatePassword } from 'firebase/auth';
 import { Navigate } from 'react-router-dom';
 import { uploadFile } from '../Uploadfile';
+import { CloudUpload } from '@mui/icons-material';
 
 
-export default function Profile({ user,auth,logout }) {
-  const [profilePicture, setProfilePicture] = useState('./blank-pfp.png');
+export default function Profile({ user,auth,logout,setUser }) {
+  const [profilePicture, setProfilePicture] = useState(user?.photoURL||'./blank-pfp.png');
   const [uploading, setUploading] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(user?.displayName||'');
+  const [email, setEmail] = useState(user?.email||'');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setName(currentUser.displayName || '');
-        setEmail(currentUser.email || '');
-        setProfilePicture(currentUser.photoURL || './blank-pfp.png');
-      }
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
   const ProfilePictureChange = async (event) => {
     const file = event.target.files[0]; 
-    if (file) {
+    if (file && file.size<5242880) {
       try {
         setUploading(true);
         const cloudinaryResponse = await uploadFile(file);
+        
+       
+          if (cloudinaryResponse && cloudinaryResponse.url) {
+            const cloudinaryURL = cloudinaryResponse.url;
+            await updateProfile(auth.currentUser, { photoURL: cloudinaryURL });
   
-        if (cloudinaryResponse && cloudinaryResponse.url) {
-          const cloudinaryURL = cloudinaryResponse.url;
-          await updateProfile(auth.currentUser, { photoURL: cloudinaryURL });
-          setProfilePicture(cloudinaryURL);
-          alert('Profile picture updated successfully!');
-        } else {
-          throw new Error('Failed to get Cloudinary URL.');
-        }
+            setProfilePicture(cloudinaryURL);
+            setUser((v)=>({...v,photoURL:cloudinaryURL}))
+    
+            alert('Profile picture updated successfully!');
+          } else {
+            throw new Error('Failed to get Cloudinary URL.');
+          }
+
+        
       } catch (error) {
         console.error('Error updating profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
       } finally {
         setUploading(false);
       }
+    }else{
+      alert("Túl nagy a fájl (5mb max)")
     }
   };
   
@@ -91,6 +73,7 @@ export default function Profile({ user,auth,logout }) {
       console.error('Error updating profile:', error);
       alert('Failed to update profile. Please try again.');
     }
+    setUser((v)=>({...v,displayName:name}))
   };
 
   return (
@@ -114,17 +97,27 @@ export default function Profile({ user,auth,logout }) {
                   />
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Change Profile Picture</label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={ProfilePictureChange}
-                      className="mt-1 text-sm"
-                      disabled={uploading}
-                    />
+                    <Button
+                      component="label"
+                      role={undefined}
+                      variant="contained"
+                      tabIndex={-1}
+                      startIcon={<CloudUpload />}
+                      
+                    >
+                      Upload files
+                      <VisuallyHiddenInput
+                        type="file"
+                        accept='.png, .jpg, .gif'
+                        onChange={ProfilePictureChange}
+                        disabled={uploading}
+                        multiple
+                      />
+                    </Button>
                     {uploading && <p className="text-sm text-blue-500">Uploading...</p>}
                   </div>
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Name</label>
                   <input

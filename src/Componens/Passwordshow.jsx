@@ -1,6 +1,10 @@
+import { VisibilityOff } from '@mui/icons-material';
+import { Visibility } from '@mui/icons-material';
+import { FilledInput, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import React from 'react'
+import { useState } from 'react';
 
-export default function Passwordshow() {
+export default function Passwordshow({value,onChange,label}) {
 
   const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -13,15 +17,15 @@ export default function Passwordshow() {
       };
   return (
     <div className="content-center ">
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
+        <FormControl className='w-80 align-middle' required variant="filled">
+          <InputLabel>{label}</InputLabel>
+              <FilledInput
+                value={value}
+                onChange={onChange}
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position="end" >
                     <IconButton
-                      sx={{ color: 'white' }}
                       aria-label={showPassword ? 'hide the password' : 'display the password'}
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
@@ -29,11 +33,11 @@ export default function Passwordshow() {
                       edge="end"                  
                       >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-            }
-            label="Password"
-            />
+                    </IconButton>
+                  </InputAdornment>
+                  }
+                  label="Password"
+              />
           </FormControl>
       </div>
   )

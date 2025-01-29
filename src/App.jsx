@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
-import MyTickets from "./pages/MyTickets.jsx";
 import Login from "./pages/Login.jsx";
 import OpenTicket from "./pages/OpenTicket.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -24,6 +23,7 @@ function App() {
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth,(currentUser)=> {
       setUser(currentUser);
+      console.log(currentUser)
     });
     return() => unsubscribe;
   }, []);
@@ -33,12 +33,11 @@ function App() {
   }
 
   const router = createBrowserRouter([
-    { path: "/", element: <Layout user={user} logout={logout} />, children: [
+    { path: "/", element: <Layout user={user} logout={logout}  />, children: [
       { path: "/", element: <Home /> },
-      { path: "/mytickets", element: <MyTickets /> },
       { path: "/login", element: <Login auth={auth} setUser={setUser} user={user} /> },
       { path: "/openticket", element: <OpenTicket /> },
-      { path: "/profile", element: <Profile user={user} auth={auth} logout={logout} /> },
+      { path: "/profile", element: <Profile user={user} auth={auth} logout={logout} setUser={setUser} /> },
       { path:"/forgotpassword", element: <ResetPassword auth={auth}/>}
     ]}
   ]);

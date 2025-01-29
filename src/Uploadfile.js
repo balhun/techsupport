@@ -20,17 +20,17 @@ export const uploadFile = async (file) => {
   }
 };
 
-//const url=import.meta.env.RENDER_URL
+// const url=import.meta.env.RENDER_URL
 
 
-/*export const deletePhoto=async(id)=>{
-    console.log(id);
+// export const deletePhoto=async(id)=>{
+//     console.log(id);
 
-    try {
-        await axios.delete(url+id)
-    } catch (error) {
-        console.log(error);
+//     try {
+//         await axios.delete(url+id)
+//     } catch (error) {
+//         console.log(error);
         
-    }
+//     }
     
-}*/
+// }

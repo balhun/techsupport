@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import {signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
 import { GoogleAuthProvider } from "firebase/auth";
+import Passwordshow from '../Componens/Passwordshow';
 
 export default function Login({ auth, user }) {
 
@@ -86,7 +87,7 @@ export default function Login({ auth, user }) {
               value={loginEmail}
               onChange={e=> { setLoginEmail(e.target.value); setLoginError(false)}}
             />
-            <TextField
+            {/* <TextField
               type='password'
               className='w-80 align-middle'
               required
@@ -94,6 +95,11 @@ export default function Login({ auth, user }) {
               variant='filled'
               value={loginPassword}
               onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
+            /> */}
+            <Passwordshow
+              value={loginPassword}
+              onChange={e => { setLoginPassword(e.target.value); setLoginError(false); }}
+              label="Jelszó"
             />
             <Link href="/forgotpassword" sx={{textDecoration: "none", color: "#4b5563"}}>Elfelejtett jelszó</Link>
             {loginError ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>Hibás Email vagy jelszó</Alert> : ""}
@@ -119,7 +125,7 @@ export default function Login({ auth, user }) {
                 value={newEmail}
                 onChange={e => {setNewEmail(e.target.value); setError(false);}} 
               />
-              <TextField
+              { /*<TextField
                 className='w-80 align-middle'
                 required
                 label="Jelszó"
@@ -127,8 +133,13 @@ export default function Login({ auth, user }) {
                 type='password'
                 value={newPassword}
                 onChange={e => {setNewPassword(e.target.value); setError(false);}}
+              />*/ }
+              <Passwordshow 
+                value={newPassword}
+                onChange={e => {setNewPassword(e.target.value); setError(false);}}
+                label="Jelszó"
               />
-              <TextField
+              {/* <TextField
                 className='w-80 align-middle'
                 required
                 type='password'
@@ -136,6 +147,11 @@ export default function Login({ auth, user }) {
                 value={confirmPassword}
                 onChange={e => {setConfirmPassword(e.target.value); setError(false);}}
                 variant='filled'
+              /> */}
+              <Passwordshow 
+                value={confirmPassword}
+                onChange={e => {setConfirmPassword(e.target.value); setError(false);}}
+                label="Jelszó megerősítés"
               />
               {error ? <Alert severity="error" variant='filled' sx={{width: "320px"}}>{errorMessage}</Alert> : "" }
               <Button  variant='contained' className='w-80' onClick={regist}>Regisztrálás</Button>

@@ -28,7 +28,7 @@ export default function RespMenu({ user, setUser, logout }) {
   return (
     <Stack
       direction="row"
-      className="flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75"
+      className="flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75 relative"
     >
       {isSmallScreen ? (
         <>
@@ -78,9 +78,9 @@ export default function RespMenu({ user, setUser, logout }) {
           </ButtonGroup>
         </Stack>
       )}
-      <Stack direction="column" justifyContent="center" alignItems="center" flexGrow={1} sx={{ textAlign: 'center' }}>
-        <h1 className={`text-3xl md:text-4xl ${isSmallScreen ? 'text-xl' : ''}`}>Welcome to Technical Support™</h1>
-      </Stack>
+      {/* <div className='absolute top-0 left-0 flex justify-center items-center'> */}
+        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isSmallScreen ? 'text-xl' : ''}`}>Welcome to Technical Support™</h1>
+      {/* </div> */}
       <Stack direction="row" gap={2} alignItems="center">
         {user ? (
           <Link to="/profile">
