@@ -68,8 +68,9 @@ export default function Profile({ user,auth,logout,setUser }) {
       alert('Failed to update profile. Please try again.');
     }
     setUser((v)=>({...v,displayName:name}))
+    console.log(user)
   };
-
+  //Admin uid belemegy az sqlbe es onnan lehivva csekkolja le hogy admin vagy nem
   return (
     <>
       {user ? (

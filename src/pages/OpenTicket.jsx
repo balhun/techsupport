@@ -13,8 +13,8 @@ export default function OpenTicket({ user }) {
   };
 
   return (
-    <div className="flex flex-col items-center island glowing justify-center min-h-screen bg-gradient-to-b from-purple-900 to-blue-600 p-4">
-      <Box className="bg-white shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg">
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+      <Box className="bg-white shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg island glowing">
         <Typography variant="h5" align="center" className="text-gray-800 font-semibold">Open a Support Ticket</Typography>
         {user ? (null):
           <Typography variant="body2" align="center" className="text-gray-600">Létrehozhat új jegyet, ha be van <Link className="text-blue-700 underline" href="/login">jelentkezve</Link>.</Typography>

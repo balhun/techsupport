@@ -56,7 +56,7 @@ export default function RespMenu({ user, setUser, logout }) {
             {user ? 
             (
               <MenuItem onClick={() => { handleClose(); logout(); }} className="hover:bg-gray-700">
-                <LogoutIcon className="mr-2" />Log out
+                <LogoutIcon className="mr-2" />Kijelentkezés
               </MenuItem>
             ) : 
             (
@@ -92,9 +92,9 @@ export default function RespMenu({ user, setUser, logout }) {
         ) : (
           ''
         )}
-        {user ? (!isSmallScreen && (<Link to="/"><Button variant="outlined" onClick={logout}>Log out</Button></Link>))
+        {user ? (!isSmallScreen && (<Link to="/"><Button variant="outlined" onClick={logout}>Kijelentkezés</Button></Link>))
         : 
-        (!isSmallScreen && (<Link to="/login"><Button variant={pathname === '/login' ? 'outlined' : 'contained'}>Log in</Button></Link>)
+        (!isSmallScreen && (<Link to="/login"><Button variant={pathname === '/login' ? 'outlined' : 'contained'}>Bejelentkezés</Button></Link>)
         )}
       </Stack>
     </Stack>
