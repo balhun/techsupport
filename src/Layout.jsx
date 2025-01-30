@@ -10,10 +10,10 @@ export default function Layout({ user, logout }) {
         <div>
             <RespMenu user={user} logout={logout} />
         </div>
-        <div >
+        <div>
             <Outlet />
         </div>
-        <div>
+        <div >
             <RespFooter/>
         </div>
     </div>

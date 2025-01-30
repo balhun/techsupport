@@ -19,18 +19,3 @@ export const uploadFile = async (file) => {
     console.log(error);
   }
 };
-
-// const url=import.meta.env.RENDER_URL
-
-
-// export const deletePhoto=async(id)=>{
-//     console.log(id);
-
-//     try {
-//         await axios.delete(url+id)
-//     } catch (error) {
-//         console.log(error);
-        
-//     }
-    
-// }

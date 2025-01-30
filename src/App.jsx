@@ -41,7 +41,7 @@ function App() {
     { path: "/", element: <Layout user={user} logout={logout}  />, children: [
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login auth={auth} setUser={setUser} user={user} logout={logout} successRegist={successRegist} setSuccessRegist={setSuccessRegist} /> },
-      { path: "/openticket", element: <OpenTicket /> },
+      { path: "/openticket", element: <OpenTicket user={user} /> },
       { path: "/profile", element: <Profile user={user} auth={auth} logout={logout} setUser={setUser} /> },
       { path: "/forgotpassword", element: <ResetPassword auth={auth}/>},
       { path: "/about" , element: <About/>}
