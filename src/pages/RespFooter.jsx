@@ -25,7 +25,7 @@ export default function RespFooter() {
             <Typography variant="body2" className="text-gray-400">GitHub Repositories</Typography>
             <Stack direction="row" spacing={2}>
               <Link href="https://github.com/balhun/techsupport" target="_blank" rel="noopener"  className="text-gray-300 hover:text-gray-100 flex items-center"><GitHubIcon className="mr-1" /> FrontEnd</Link>
-              <Link href="https://github.com/YoSlurP/ProjectBackEnd"target="_blank" rel="noopener" className="text-gray-300 hover:text-gray-100 flex items-center" ><GitHubIcon className="mr-1" /> BackEnd</Link>
+              <Link href="https://github.com/YoSlurP/TechBackend" target="_blank" rel="noopener" className="text-gray-300 hover:text-gray-100 flex items-center" ><GitHubIcon className="mr-1" /> BackEnd</Link>
             </Stack>
           </Stack>
           <Stack direction="column" spacing={1} alignItems="center" className="right-3">
