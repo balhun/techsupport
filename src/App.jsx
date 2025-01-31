@@ -12,6 +12,8 @@ import OpenTicket from "./pages/OpenTicket.jsx";
 import Profile from "./pages/Profile.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import About from './pages/About.jsx';
+import Admin from "./pages/Admin.jsx";
+import Notfound from "./pages/Notfound.jsx";
 
 
 export const app = initializeApp(firebaseConfig);
@@ -44,7 +46,9 @@ function App() {
       { path: "/openticket", element: <OpenTicket user={user} /> },
       { path: "/profile", element: <Profile user={user} auth={auth} logout={logout} setUser={setUser} /> },
       { path: "/forgotpassword", element: <ResetPassword auth={auth}/>},
-      { path: "/about" , element: <About/>}
+      { path: "/about" , element: <About/>},
+      { path: "/admin" , element: <Admin/>},
+      { path: "*" , element: <Notfound/>}
     ]}
   ]);
   

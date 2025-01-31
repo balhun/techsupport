@@ -77,7 +77,7 @@ export default function RespMenu({ user, setUser, logout }) {
         </Stack>
       )}
       {/* <div className='absolute top-0 left-0 flex justify-center items-center'> */}
-        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>Technikai támogatás™</h1>
+        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>Technikai támogatás</h1>
       {/* </div> */}
       <Stack direction="row" gap={2} alignItems="center">
         {user ? (

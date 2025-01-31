@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Typography, Box,Link } from "@mui/material";
+import { Button, Typography, Box,Link, } from "@mui/material";
 
 
 export default function OpenTicket({ user }) {
   const [text, setText] = useState("");
+  const [tema,setTema]=useState("")
   const maxLength = 512;
 
   const Change = (event) => {
@@ -21,8 +22,9 @@ export default function OpenTicket({ user }) {
         }
         {user ? (
           <>
-            <Box>
-              <textarea  value={text} onChange={Change} rows="11" className="w-full border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Problémád ide írd..."></textarea>
+            <Box >
+              <textarea value={tema}  rows="1" className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Téma"></textarea>
+              <textarea  value={text} onChange={Change} rows="11" className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Problémád ide írd..."></textarea>
               <Typography variant="body2" align="right" className="text-gray-500 mt-1">Betűszám: {text.length}/{maxLength} </Typography>
             </Box>
             <Box display="flex" justifyContent="center">
