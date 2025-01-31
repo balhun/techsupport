@@ -26,7 +26,7 @@ export default function RespMenu({ user, setUser, logout }) {
   return (
     <Stack
       direction="row"
-      className="flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75 relative menubar"
+      className="pb-5 flex flex-row md:flex-col bg-gray-900 text-white justify-between items-center p-2 rounded-b-xl z-10 shadow-xl hover:shadow-2xl transition-shadow bg-opacity-75 relative menubar"
     >
       {isSmallScreen ? (
         <>
@@ -76,13 +76,11 @@ export default function RespMenu({ user, setUser, logout }) {
           </ButtonGroup>
         </Stack>
       )}
-      {/* <div className='absolute top-0 left-0 flex justify-center items-center'> */}
-        <h1 className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>Technikai támogatás</h1>
-      {/* </div> */}
+      <Link to='/' className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer`}>Technikai támogatás</Link>
       <Stack direction="row" gap={2} alignItems="center">
         {user ? (
           <Link to="/profile">
-            <Stack direction="row" gap={1} className="p-2 rounded-md hover:bg-gray-800 hover:cursor-pointer transition-colors items-center">
+            <Stack direction="row" gap={1} className="p-2 rounded-md hover:bg-gray-800 bg-gray-900 bg-opacity-50  hover:cursor-pointer transition-all duration-600 items-center">
               <img src={user.photoURL != null ? user.photoURL : "./blank-pfp.png"} alt="User" className="w-8 h-8 rounded-full"/>
               {!isLargeScreen ? 
                 <span className="flex items-center">{user.displayName}</span>
