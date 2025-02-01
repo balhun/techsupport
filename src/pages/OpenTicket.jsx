@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Typography, Box,Link, } from "@mui/material";
+import axios from "axios";
 
 
 export default function OpenTicket({ user }) {
@@ -12,6 +13,9 @@ export default function OpenTicket({ user }) {
       setText(event.target.value);
     }
   };
+  async function adduzenet(req,res){
+      await axios.post("https://techbackend-app4.onrender.com/uzenet",{uzenet:text,uaz:user.uid})
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
@@ -28,7 +32,7 @@ export default function OpenTicket({ user }) {
               <Typography variant="body2" align="right" className="text-gray-500 mt-1">Betűszám: {text.length}/{maxLength} </Typography>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" color="primary" size="large"  className="w-full md:w-auto px-6" disabled={text.length === 0}>Küldés</Button>
+              <Button variant="contained" onClick={adduzenet} color="primary" size="large"  className="w-full md:w-auto px-6" disabled={text.length === 0}>Küldés</Button>
             </Box>
           </>
         ) : null}
