@@ -4,11 +4,11 @@ import RespMenu from "./pages/RespMenu.jsx";
 import RespFooter from './pages/RespFooter.jsx';
 
 
-export default function Layout({ user, logout }) {
+export default function Layout({ user,admin, logout }) {
   return (
     <div className="flex flex-col min-h-screen">
         <div>
-            <RespMenu user={user} logout={logout} />
+            <RespMenu user={user}admin={admin} logout={logout} />
         </div>
         <div className='flex-grow'>
             <Outlet />

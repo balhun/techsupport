@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import { Button, ButtonGroup, Stack, Menu, MenuItem, useMediaQuery, useTheme, Divider } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
-import HomeIcon from '@mui/icons-material/Home';
-import SupportIcon from '@mui/icons-material/Support';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import React, { useState } from "react";
+import {
+  Button,
+  ButtonGroup,
+  Stack,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+  Divider,
+} from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import SupportIcon from "@mui/icons-material/Support";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-export default function RespMenu({ user, setUser, logout }) {
+export default function RespMenu({ user, admin, setUser, logout }) {
   const { pathname } = useLocation();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +30,7 @@ export default function RespMenu({ user, setUser, logout }) {
 
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
 
   return (
     <Stack
@@ -30,39 +39,70 @@ export default function RespMenu({ user, setUser, logout }) {
     >
       {isSmallScreen ? (
         <>
-          <Button onClick={handleClick} variant="contained" className="w-auto" color="primary">
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            className="w-auto"
+            color="primary"
+          >
             Menu
           </Button>
-          <Menu anchorEl={anchorEl} open={openMenu} onClose={handleClose}
+          <Menu
+            anchorEl={anchorEl}
+            open={openMenu}
+            onClose={handleClose}
             PaperProps={{
               sx: {
-                backgroundColor: '#1f1f1f',
-                borderRadius: '10px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                backgroundColor: "#1f1f1f",
+                borderRadius: "10px",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
               },
             }}
           >
             <Link to="/" className="text-white">
-              <MenuItem onClick={handleClose} selected={pathname === '/'} className="hover:bg-gray-700">
-                <HomeIcon className="mr-2" />Főoldal
+              <MenuItem
+                onClick={handleClose}
+                selected={pathname === "/"}
+                className="hover:bg-gray-700"
+              >
+                <HomeIcon className="mr-2" />
+                Főoldal
               </MenuItem>
             </Link>
-            <Link to="/openticket" className="text-white">
-              <MenuItem onClick={handleClose} selected={pathname === '/openticket'} className="hover:bg-gray-700">
-                <SupportIcon className="mr-2" />Ügyfélszolgálat
+
+            <Link to={!admin ? "/openticket" : "/admin"} className="text-white">
+              <MenuItem
+                onClick={handleClose}
+                selected={pathname === `/${!admin ? "openticket" : "admin"}`}
+                className="hover:bg-gray-700"
+              >
+                <SupportIcon className="mr-2" />
+                {!admin ? "Ügyfélszolgálat" : "Admin"}
               </MenuItem>
             </Link>
-            <Divider sx={{ my: 1, backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
-            {user ? 
-            (
-              <MenuItem onClick={() => { handleClose(); logout(); }} className="hover:bg-gray-700">
-                <LogoutIcon className="mr-2" />Kijelentkezés
+            <Divider
+              sx={{ my: 1, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            />
+            {user ? (
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  logout();
+                }}
+                className="hover:bg-gray-700"
+              >
+                <LogoutIcon className="mr-2" />
+                Kijelentkezés
               </MenuItem>
-            ) : 
-            (
+            ) : (
               <Link to="/login" className="text-white">
-                <MenuItem onClick={handleClose} selected={pathname === '/login'} className="hover:bg-gray-700">
-                  <LoginIcon className="mr-2" />Bejelentkezés
+                <MenuItem
+                  onClick={handleClose}
+                  selected={pathname === "/login"}
+                  className="hover:bg-gray-700"
+                >
+                  <LoginIcon className="mr-2" />
+                  Bejelentkezés
                 </MenuItem>
               </Link>
             )}
@@ -71,29 +111,71 @@ export default function RespMenu({ user, setUser, logout }) {
       ) : (
         <Stack direction="row" gap={1}>
           <ButtonGroup variant="outlined">
-            <Link to="/"><Button variant={pathname === '/' ? 'outlined' : 'contained'}>Főoldal</Button></Link>
-            <Link to="/openticket"><Button variant={pathname === '/openticket' ? 'outlined' : 'contained'}>Ügyfélszolgálat</Button></Link>
+            <Link to="/">
+              <Button variant={pathname === "/" ? "outlined" : "contained"}>
+                Főoldal
+              </Button>
+            </Link>
+            <Link to={!admin ? "/openticket" : "/admin"}>
+              <Button
+                variant={
+                  pathname === `/${!admin ? "openticket" : "admin"}`
+                    ? "outlined"
+                    : "contained"
+                }
+              >
+                {!admin ? "Ügyfélszolgálat" : "Admin"}
+              </Button>
+            </Link>
           </ButtonGroup>
         </Stack>
       )}
-      <Link to='/' className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer`}>Technikai támogatás</Link>
+      <Link
+        to="/"
+        className={`text-3xl md:text-4xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer`}
+      >
+        Technikai támogatás
+      </Link>
       <Stack direction="row" gap={2} alignItems="center">
         {user ? (
           <Link to="/profile">
-            <Stack direction="row" gap={1} className="p-2 rounded-md hover:bg-gray-800 bg-gray-900 bg-opacity-50  hover:cursor-pointer transition-all duration-600 items-center">
-              <img src={user.photoURL != null ? user.photoURL : "./blank-pfp.png"} alt="User" className="w-8 h-8 rounded-full"/>
-              {!isLargeScreen ? 
+            <Stack
+              direction="row"
+              gap={1}
+              className="p-2 rounded-md hover:bg-gray-800 bg-gray-900 bg-opacity-50  hover:cursor-pointer transition-all duration-600 items-center"
+            >
+              <img
+                src={user.photoURL != null ? user.photoURL : "./blank-pfp.png"}
+                alt="User"
+                className="w-8 h-8 rounded-full"
+              />
+              {!isLargeScreen ? (
                 <span className="flex items-center">{user.displayName}</span>
-              : ""}
+              ) : (
+                ""
+              )}
             </Stack>
           </Link>
         ) : (
-          ''
+          ""
         )}
-        {user ? (!isSmallScreen && (<Link to="/"><Button variant="outlined" onClick={logout}>Kijelentkezés</Button></Link>))
-        : 
-        (!isSmallScreen && (<Link to="/login"><Button variant={pathname === '/login' ? 'outlined' : 'contained'}>Bejelentkezés</Button></Link>)
-        )}
+        {user
+          ? !isSmallScreen && (
+              <Link to="/">
+                <Button variant="outlined" onClick={logout}>
+                  Kijelentkezés
+                </Button>
+              </Link>
+            )
+          : !isSmallScreen && (
+              <Link to="/login">
+                <Button
+                  variant={pathname === "/login" ? "outlined" : "contained"}
+                >
+                  Bejelentkezés
+                </Button>
+              </Link>
+            )}
       </Stack>
     </Stack>
   );
