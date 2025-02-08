@@ -93,7 +93,7 @@ function App() {
         },
         { path: "/forgotpassword", element: <ResetPassword auth={auth} /> },
         { path: "/about", element: <About /> },
-        { path: "/admin", element: <Admin /> },
+        { path: "/admin", element: <Admin admin={admin} user={user} /> },
         { path: "*", element: <Notfound /> },
       ],
     },
