@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Typography, Box, Link } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
