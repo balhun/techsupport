@@ -29,7 +29,7 @@ export default function OpenTicket({ user }) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
-      <Box className="bg-white shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg island glowing">
+      <Box className="bg-white glowing shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg island glowing">
         <Typography
           variant="h5"
           align="center"
@@ -87,7 +87,7 @@ export default function OpenTicket({ user }) {
                 color="primary"
                 size="large"
                 className="w-full md:w-auto px-6 mt-4"
-                disabled={text.length === 0}
+                disabled={text.length === 0 || cim.length === 0}
               >
                 Küldés
               </Button>
