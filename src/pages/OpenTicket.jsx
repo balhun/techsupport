@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Typography, Box,Link, } from "@mui/material";
+import { Button, Typography, Box, Link } from "@mui/material";
 import axios from "axios";
-
+import { BACKEND_URL } from "../constants/backEnd";
 
 export default function OpenTicket({ user }) {
   const [text, setText] = useState("");
-  const [tema,setTema]=useState("")
+  const [cim, setCim] = useState("");
+  const [success, setSuccess] = useState(false);
   const maxLength = 512;
 
   const Change = (event) => {
@@ -13,26 +14,83 @@ export default function OpenTicket({ user }) {
       setText(event.target.value);
     }
   };
-  async function adduzenet(req,res){
-      await axios.post("https://techbackend-app4.onrender.com/uzenet",{uzenet:text,uaz:user.uid})
+
+  async function adduzenet() {
+    await axios.post(
+      `${BACKEND_URL}/uzenetek`,
+      { uzenet: text, cim: cim },
+      { headers: { "x-user-id": user.uid } }
+    );
+    setText("");
+    setCim("");
+    setSuccess(true);
+    setTimeout(() => setSuccess(false), 3000);
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
       <Box className="bg-white shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg island glowing">
-        <Typography variant="h5" align="center" className="text-gray-800 font-semibold">Open a Support Ticket</Typography>
-        {user ? (null):
-          <Typography variant="body2" align="center" className="text-gray-600">Létrehozhat új jegyet, ha be van <Link className="text-blue-700 underline" href="/login">jelentkezve</Link>.</Typography>
-        }
+        <Typography
+          variant="h5"
+          align="center"
+          className="text-gray-800 font-semibold"
+        >
+          Open a Support Ticket
+        </Typography>
+        {user ? null : (
+          <Typography variant="body2" align="center" className="text-gray-600">
+            Létrehozhat új jegyet, ha be van{" "}
+            <Link className="text-blue-700 underline" href="/login">
+              jelentkezve
+            </Link>
+            .
+          </Typography>
+        )}
         {user ? (
           <>
-            <Box >
-              <textarea value={tema}  rows="1" className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Téma"></textarea>
-              <textarea  value={text} onChange={Change} rows="11" className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Problémád ide írd..."></textarea>
-              <Typography variant="body2" align="right" className="text-gray-500 mt-1">Betűszám: {text.length}/{maxLength} </Typography>
+            <Box>
+              <textarea
+                value={cim}
+                onChange={(e) => setCim(e.target.value)}
+                rows="1"
+                className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Téma"
+              ></textarea>
+              <textarea
+                value={text}
+                onChange={Change}
+                rows="11"
+                className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Problémád ide írd..."
+              ></textarea>
+              <Typography
+                variant="body2"
+                align="right"
+                className="text-gray-500 mt-1"
+              >
+                Betűszám: {text.length}/{maxLength}{" "}
+              </Typography>
             </Box>
+            {success && (
+              <Box
+                className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4"
+                role="alert"
+              >
+                <strong className="font-bold">Siker!</strong>
+                <span className="block sm:inline"> Üzenet elküldve!</span>
+              </Box>
+            )}
             <Box display="flex" justifyContent="center">
-              <Button variant="contained" onClick={adduzenet} color="primary" size="large"  className="w-full md:w-auto px-6" disabled={text.length === 0}>Küldés</Button>
+              <Button
+                variant="contained"
+                onClick={adduzenet}
+                color="primary"
+                size="large"
+                className="w-full md:w-auto px-6 mt-4"
+                disabled={text.length === 0}
+              >
+                Küldés
+              </Button>
             </Box>
           </>
         ) : null}
