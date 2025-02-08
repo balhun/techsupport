@@ -19,10 +19,6 @@ export default function Admin({ admin, user }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || !admin) {
-      navigate("/notfound");
-    }
-
     const getMessages = async () => {
       try {
         const response = await axios.get(`${BACKEND_URL}/admin/uzenetek`, {
@@ -34,10 +30,18 @@ export default function Admin({ admin, user }) {
       }
     };
 
-    if (user && admin) {
-      getMessages();
-    }
-  }, [user, admin, navigate]);
+    getMessages();
+  }, [user, admin]);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (admin === false) {
+        navigate("/notfound");
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [admin]);
 
   const handleSendResponse = async (id) => {
     try {

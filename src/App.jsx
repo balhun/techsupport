@@ -29,28 +29,23 @@ function App() {
   useEffect(() => {
     setTimeout(setSuccessRegist(false), 5000);
   }, []);
-  useEffect(() => {
-    if (!user) {
-      setAdmin(false);
-      return;
-    }
-    async function chechkadmin() {
-      try {
-        const resp = await axios.get(`${BACKEND_URL}/admin`, {
-          headers: { "x-user-id": user.uid },
-        });
-        if (resp.status === 200) setAdmin(true);
-        else setAdmin(false);
-      } catch (error) {
-        console.log(error);
-        setAdmin(false);
-      }
-    }
-    chechkadmin();
-  }, [user]);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      async function chechkadmin(currentUser) {
+        setUser(currentUser);
+        try {
+          const resp = await axios.get(`${BACKEND_URL}/admin`, {
+            headers: { "x-user-id": currentUser.uid },
+          });
+          if (resp.status === 200) setAdmin(true);
+          else setAdmin(false);
+        } catch (error) {
+          console.log(error);
+          setAdmin(false);
+        }
+      }
+      chechkadmin(currentUser);
       console.log(currentUser);
     });
     return () => unsubscribe;
