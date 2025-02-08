@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "/firebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
-
+//validacio zod
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -41,7 +41,6 @@ function App() {
           if (resp.status === 200) setAdmin(true);
           else setAdmin(false);
         } catch (error) {
-          console.log(error);
           setAdmin(false);
         }
       }

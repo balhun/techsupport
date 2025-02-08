@@ -37,7 +37,7 @@ export default function Admin({ admin, user }) {
       if (admin === false) {
         navigate("/notfound");
       }
-    }, 1000);
+    }, 500);
     return () => {
       clearTimeout(timeoutId);
     };
