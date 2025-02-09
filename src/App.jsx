@@ -26,10 +26,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [successRegist, setSuccessRegist] = useState(false);
-  useEffect(()=>{
-  console.log(firebaseConfig)
-  }
-  )
   useEffect(() => {
     setTimeout(setSuccessRegist(false), 5000);
   }, []);
@@ -49,7 +45,6 @@ function App() {
         }
       }
       chechkadmin(currentUser);
-      console.log(currentUser);
     });
     return () => unsubscribe;
   }, []);
