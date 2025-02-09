@@ -18,6 +18,7 @@ import axios from "axios";
 import { BACKEND_URL } from "./constants/backEnd.js";
 
 export const app = initializeApp(firebaseConfig);
+
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
@@ -25,7 +26,10 @@ function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [successRegist, setSuccessRegist] = useState(false);
-
+  useEffect(()=>{
+  console.log(firebaseConfig)
+  }
+  )
   useEffect(() => {
     setTimeout(setSuccessRegist(false), 5000);
   }, []);
