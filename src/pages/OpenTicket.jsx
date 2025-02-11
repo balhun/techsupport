@@ -28,8 +28,8 @@ export default function OpenTicket({ user }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen ">
-      <Box className="bg-white glowing shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg island glowing">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <Box className="bg-white glowing shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg md:max-w-2xl lg:max-w-4xl island glowing">
         <Typography
           variant="h5"
           align="center"
