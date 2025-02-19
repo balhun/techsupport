@@ -132,7 +132,7 @@ export default function RespMenu({ user, admin, setUser, logout }) {
       )}
       <Link
         to="/"
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+        className="pb-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
       >
         Technikai támogatás
       </Link>
