@@ -49,7 +49,6 @@ export default function Admin({ admin, user }) {
       await axios.post(`${BACKEND_URL}/admin/valaszok/${id}`, responseData, {
         headers: { "x-user-id": user.uid },
       });
-      alert(`Response sent for message ${id}`);
       setMessages((prevMessages) =>
         prevMessages.map((msg) =>
           msg.id === id
@@ -73,7 +72,7 @@ export default function Admin({ admin, user }) {
         <Card className="shadow-lg">
           <CardContent>
             <Typography variant="h6" className="text-xl font-semibold">
-              Megvalaszolatlan
+              Megválaszolatlan
             </Typography>
             {messages.map((msg) =>
               !msg.isAnswered ? (
@@ -85,7 +84,7 @@ export default function Admin({ admin, user }) {
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left" }}
+                    sx={{ textAlign: "left", "text-transform" : "none"}}
                   >
                     {msg.cim}
                   </Button>
@@ -94,12 +93,15 @@ export default function Admin({ admin, user }) {
                       className="p-4 mt-2"
                       sx={{ backgroundColor: "#f0f0f0", borderRadius: 1 }}
                     >
-                      <Typography variant="body1" className="mt-2">
-                        Date: {new Date(msg.created_at).toLocaleString()}
-                      </Typography>
-                      <Typography variant="body1" className="mt-2">
+                      <span className="border-b border-gray-400 block mb-3">
+                        Dátum: {new Date(msg.created_at).toLocaleString()}
+                      </span>
+                      <h1 className="block text-2xl mb-2">
+                        {msg.cim}
+                      </h1>
+                      <span className="block ml-2 mb-2">
                         {msg.uzenet}
-                      </Typography>
+                      </span>
                       <TextField
                         label="Write a response"
                         variant="outlined"
@@ -126,9 +128,9 @@ export default function Admin({ admin, user }) {
                           variant="contained"
                           color="primary"
                           onClick={() => handleSendResponse(msg.id)}
-                          style={{ margin: "8px" }}
+                          style={{ margin: "8px", "text-transform" : "none"}}
                         >
-                          Valasz elkuldese
+                          Válasz Küldése
                         </Button>
                       </div>
                     </Box>
@@ -143,7 +145,7 @@ export default function Admin({ admin, user }) {
         <Card className="shadow-lg">
           <CardContent>
             <Typography variant="h6" className="text-xl font-semibold">
-              Megvalaszolt
+              Megválaszolt
             </Typography>
             {messages.map((msg) =>
               msg.isAnswered ? (
@@ -155,7 +157,7 @@ export default function Admin({ admin, user }) {
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left" }}
+                    sx={{ textAlign: "left", "text-transform" : "none" }}
                   >
                     {msg.cim}
                   </Button>
@@ -164,25 +166,25 @@ export default function Admin({ admin, user }) {
                       className="p-4 mt-2"
                       sx={{ backgroundColor: "#e6ffe6", borderRadius: 1 }}
                     >
-                      <Typography variant="body1" className="mt-2">
-                        Date: {new Date(msg.created_at).toLocaleString()}
-                      </Typography>
-                      <Typography variant="body1" className="mt-2">
+                      <span className="border-b border-gray-400 block mb-3">
+                        Dátum: {new Date(msg.created_at).toLocaleString()}
+                      </span>
+                      <h1 className="block text-2xl mb-2">
+                        {msg.cim}
+                      </h1>
+                      <span className="block ml-2 mb-2">
                         {msg.uzenet}
-                      </Typography>
+                      </span>
                       {msg.valasz && (
-                        <Typography
-                          variant="body1"
-                          className="mt-2 font-bold text-green-700"
-                        >
-                          Answer: {msg.valasz}
-                        </Typography>
+                        <span className="pt-2 font-bold text-green-700 block border-t border-gray-400">
+                          Válasz: {msg.valasz}
+                        </span>
                       )}
-                      {msg.answerDate && (
-                        <Typography variant="body1" className="mt-2">
-                          Answered On:{" "}
+                      {msg.answerDate && ( //ez etlűnik random
+                        <span className="mt-2 block">
+                          Megválaszolva ekkor:
                           {new Date(msg.answerDate).toLocaleString()}
-                        </Typography>
+                        </span>
                       )}
                     </Box>
                   </Collapse>

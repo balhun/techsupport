@@ -44,6 +44,7 @@ function App() {
           setAdmin(false);
         }
       }
+      
       chechkadmin(currentUser);
     });
     return () => unsubscribe;
