@@ -34,10 +34,9 @@ export default function RespFooter() {
             <Typography variant="body2" className="text-gray-400 text-center   absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">Powered by Kandó's Tech™ <br /> © 2025 All rights reserved.</Typography>
           </Stack>
           <Stack direction="column" spacing={1} alignItems="flex-end">
-            <Typography variant="body2" className="text-gray-400">Gyors linkek</Typography>
+            <Typography variant="body2" className="text-gray-400">Gyors link</Typography>
             <div className="block md:flex text-right md:gap-2">
               <div><Link href="/about" className="text-gray-300 hover:text-gray-100">Rólunk</Link></div>
-              <div><Link href="/docs" className="text-gray-300 hover:text-gray-100">Dokumentáció</Link></div>
             </div>
           </Stack>
         </Stack>
