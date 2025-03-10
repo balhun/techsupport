@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom'
 
 export default function About() {
   return (
-    <div className="min-h-screen">
-      <div className="container  mx-auto p-8">
-        <h1 className="text-3xl font-bold text-center text-blue-500 mb-8">TechSupport Weboldal</h1>
+    <div>
+      <div className="container mx-auto p-8">
 
         <div className="bg-white glowing p-6 rounded-lg shadow-lg mb-6">
           <h2 className="text-xl font-semibold mb-4">Oldalak:</h2>
