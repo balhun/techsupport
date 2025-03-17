@@ -1,8 +1,15 @@
-# React + Vite
+# Tech Support
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Egy egyszerű intuitív Tech Support platform.
 
-Currently, two official plugins are available:
+## A Weboldal jellemzői
+- **Regisztrálás és Bejelentkezés:** A felhasználók be regisztrálni és bejelentkezni tudnak, hogy hozzáférjenek a weboldalhoz.
+- **Profilkép csere:** Felhasználók és adminok egyaránt meg tudják változtatni profilképüket egy személyre szabottabb élményért.
+- **Jegy létrehozás:** A Felhasználók "support ticket" tudnak nyitni, hogy segítséget kérhessenek az adminoktól.
+- **Admin jegy menedzsment:** Az adminok meg tudják tekinteni a jegyeket amiket ők kaptak, válaszolni rá és ezzel lezárni a jegyeket.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Használt technológiák a frontendhez
+- React, Tailwind, Axios, Cloudinary, Javascript, HTML, CSS, Firebase, Vitest
+
+## A dokumentáció oldalakra bontva:
+### Home
