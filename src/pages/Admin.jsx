@@ -32,6 +32,7 @@ export default function Admin({ admin, user }) {
 
     getMessages();
   }, [user, admin]);
+  
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (admin === false) {

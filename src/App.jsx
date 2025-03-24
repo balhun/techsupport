@@ -82,6 +82,7 @@ function App() {
               auth={auth}
               logout={logout}
               setUser={setUser}
+              admin={admin}
             />
           ),
         },

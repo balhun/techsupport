@@ -6,16 +6,7 @@ export default function RespFooter() {
   const [showFooter, setShowFooter] = useState(false);
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
-  useEffect(() => {
-    const Scroll = () => {
-      if (!isLargeScreen) {
-        setShowFooter(window.scrollY > 100);
-      }
-    };
-
-    window.addEventListener("scroll", Scroll);
-    return () => window.removeEventListener("scroll", Scroll);
-  }, [isLargeScreen]);
+ 
 
   //Mivel a gombok egy Link nem lehet sima tailwindel szerkeszteni. cssben kell.
 
