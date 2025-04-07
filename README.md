@@ -1,6 +1,7 @@
 # [Tech Support](https://techsupport-uzb8.onrender.com/)
 
 Egy egyszerű intuitív Tech Support platform. :tada:
+
 Az oldal linkje: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.onrender.com/)
 
 ## A Weboldal jellemzői
