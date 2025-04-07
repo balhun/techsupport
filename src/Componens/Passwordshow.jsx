@@ -4,7 +4,7 @@ import { FilledInput, FormControl, IconButton, Input, InputAdornment, InputLabel
 import React from 'react'
 import { useState } from 'react';
 
-export default function Passwordshow({value,onChange,label}) {
+export default function Passwordshow({value,onChange,label,testId}) {
 
   const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -22,6 +22,7 @@ export default function Passwordshow({value,onChange,label}) {
               <FilledInput
                 value={value}
                 onChange={onChange}
+                data-testid={testId}
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position="end" >

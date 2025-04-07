@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Button, Typography, Box, Link } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
+import { useNavigate } from "react-router-dom";
 
 export default function OpenTicket({ user }) {
   const [text, setText] = useState("");
   const [cim, setCim] = useState("");
   const [success, setSuccess] = useState(false);
   const maxLength = 512;
+
+  const navigate=useNavigate();
 
   const Change = (event) => {
     if (event.target.value.length <= maxLength) {
@@ -40,7 +43,11 @@ export default function OpenTicket({ user }) {
         {user ? null : (
           <Typography variant="body2" align="center" className="text-gray-600">
             Létrehozhat új jegyet, ha be van{" "}
-            <Link className="text-blue-700 underline" href="/login">
+            <Link className="text-blue-700 underline cursor-pointer"  to="/login"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/login");
+            }}>
               jelentkezve
             </Link>
             .

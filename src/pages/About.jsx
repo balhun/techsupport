@@ -57,9 +57,11 @@ export default function About() {
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">Cseh Lajos Gergő</h2>
             <p className="text-gray-700 mb-4">Frontend fejlesztő, aki a felhasználói élmény és az interaktív weboldalak fejlesztésére koncentrál.</p>
             <img
-              src="https://via.placeholder.com/150"
+              src="CsehGeri.png"
               alt="Cseh Lajos Gergő"
               className="mx-auto rounded-full mb-4"
+              
+              
             />
           </div>
         </div>

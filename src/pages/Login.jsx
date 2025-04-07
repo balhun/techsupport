@@ -31,6 +31,7 @@ export default function Login({
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  
 
   async function login() {
     try {
@@ -103,6 +104,7 @@ export default function Login({
             <TextField
               className="w-80 align-middle"
               required
+              data-testid="email-input"
               label="Email"
               variant="filled"
               value={loginEmail}
@@ -113,6 +115,7 @@ export default function Login({
             />
             <Passwordshow
               value={loginPassword}
+              testId="password-input-1"
               onChange={(e) => {
                 setLoginPassword(e.target.value);
                 setLoginError(false);
@@ -176,6 +179,7 @@ export default function Login({
             />
             <Passwordshow
               value={newPassword}
+              testId="password-input-2"
               onChange={(e) => {
                 setNewPassword(e.target.value);
                 setError(false);
@@ -184,6 +188,7 @@ export default function Login({
             />
             <Passwordshow
               value={confirmPassword}
+              testId="password-input-2"
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
                 setError(false);
