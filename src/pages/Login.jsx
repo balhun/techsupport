@@ -15,8 +15,8 @@ export default function Login({
   auth,
   user,
   logout,
-  successRegist,
-  setSuccessRegist,
+  //successRegist,
+  //setSuccessRegist,
 }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -53,7 +53,7 @@ export default function Login({
       setErrorMessage("Nem egyezik a két jelszó!");
     } else {
       try {
-        setSuccessRegist(false);
+        //setSuccessRegist(false);
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           newEmail,
@@ -64,7 +64,7 @@ export default function Login({
             displayName: felhasznalonev,
             photoURL: "./blank-pfp.png",
           });
-          setSuccessRegist(true);
+          //setSuccessRegist(true);
         });
 
       } catch (err) {
@@ -190,7 +190,7 @@ export default function Login({
               }}
               label="Jelszó megerősítés"
             />
-            {error ? (
+            {/*error ? (
               <Alert severity="error" variant="filled" sx={{ width: "320px" }}>
                 {errorMessage}
               </Alert>
@@ -204,7 +204,7 @@ export default function Login({
               </Alert>
             ) : (
               ""
-            )}
+            )*/}
             <Button variant="contained" className="w-80" onClick={regist}>
               Regisztrálás
             </Button>

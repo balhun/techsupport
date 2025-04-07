@@ -25,10 +25,10 @@ export const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
-  const [successRegist, setSuccessRegist] = useState(false);
+  /*const [successRegist, setSuccessRegist] = useState(false);
   useEffect(() => {
     setTimeout(setSuccessRegist(false), 5000);
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -68,8 +68,8 @@ function App() {
               setUser={setUser}
               user={user}
               logout={logout}
-              successRegist={successRegist}
-              setSuccessRegist={setSuccessRegist}
+              //successRegist={successRegist}
+              //setSuccessRegist={setSuccessRegist}
             />
           ),
         },
