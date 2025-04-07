@@ -2,6 +2,8 @@
 
 Egy egyszerű intuitív Tech Support platform. :tada:
 
+Az oldal linkje: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.onrender.com/)
+
 ## A Weboldal jellemzői
 - **Regisztrálás és Bejelentkezés:** A felhasználók be regisztrálni és bejelentkezni tudnak, hogy hozzáférjenek a weboldalhoz.
 - **Profilkép csere:** Felhasználók és adminok egyaránt meg tudják változtatni profilképüket egy személyre szabottabb élményért.
