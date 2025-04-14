@@ -1,4 +1,4 @@
-# [Tech Support](https://techsupport-uzb8.onrender.com/)
+# [Tech Support](https://techsupport-uzb8.onrender.com/) - Fejlesztés alatt
 
 Egy egyszerű intuitív Tech Support platform. :tada:
 
