@@ -47,9 +47,9 @@ export default function About() {
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">Hunor Balázs</h2>
             <p className="text-gray-700 mb-4">Webfejlesztő, aki a backend és frontend technológiákra specializálódott. Érdeklődik a modern JavaScript keretrendszerek iránt.</p>
             <img
-              src="https://via.placeholder.com/150"
+              src="BalHunor.png"
               alt="Hunor Balázs"
-              className="mx-auto rounded-full mb-4"
+              className="mx-auto rounded-full mb-4 h-96"
             />
           </div>
 
@@ -59,9 +59,7 @@ export default function About() {
             <img
               src="CsehGeri.png"
               alt="Cseh Lajos Gergő"
-              className="mx-auto rounded-full mb-4"
-              
-              
+              className="mx-auto rounded-full mb-4 h-96"
             />
           </div>
         </div>

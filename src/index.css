@@ -32,16 +32,7 @@ body {
     }
 }
 
-.menubar Button {
-    text-transform: none;
-}
-
+.menubar Button { text-transform: none; }
 .island Button { text-transform: none; }
-
-.kisbetu {
-    text-transform: none;
-}
-
-.profileBox {
-    height: 525.5px;
-}
+.kisbetu { text-transform: none; }
+.profileBox { height: 525.5px; }
