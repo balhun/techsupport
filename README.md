@@ -17,6 +17,8 @@ Az oldal linkje: [https://techsupport-uzb8.onrender.com/](https://techsupport-uz
 ### Home
 Egy egyszerű főoldal. A "/" erre az oldalra vezet. Tailwind használata erősen látható ezen az oldalon, mivel animált h1-et készítettünk. Próbáltunk egy professzionális bemutatkozót készíteni, hogy minél több felhasználót ragadjon meg a szolgáltatásaink.
 
+![Home oldalról kép](https://github.com/balhun/techsupport/blob/master/images/home.png)
+
 ### Profile
 Ha nem vagyunk bejelentkezve átirányit a login oldalra. Felhasználótól és admintól függ, hogy mit láthatunk az oldalon. Viszont a baloldali fehér rész mindekettőnek ugyan az, egy egyszerű személyes adatokat és profilképet szerkesztő felület. Ha felhasználóként vagyunk bejelentkezve, akkor a jobb oldali fehér részen a jegyeid láthatod. Legyen az nyitott vagy már megválaszolt. Ha még nincs megválaszolva, egy MUI <Alert>-el értesítjük a felhasználót.
 Viszont ha adminként vagyunk bejelentkezve, akkor a fehér részen egy nagy gomb látható ami átírányít az admin felületre.
