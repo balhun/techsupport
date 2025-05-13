@@ -36,7 +36,6 @@ export default function RespMenu({ user, admin, logout }) {
     setAnchorEl(null);
   };
 
-  // Fetch messages and calculate unread count
   useEffect(() => {
     const getMessages = async () => {
       if (admin) {
