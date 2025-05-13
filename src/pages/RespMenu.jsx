@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   ButtonGroup,
@@ -8,14 +8,17 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  Badge,
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import SupportIcon from "@mui/icons-material/Support";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import axios from "axios";
+import { BACKEND_URL } from "../constants/backEnd";
 
-export default function RespMenu({ user, admin, setUser, logout }) {
+export default function RespMenu({ user, admin, logout }) {
   const { pathname } = useLocation();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -23,6 +26,7 @@ export default function RespMenu({ user, admin, setUser, logout }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,6 +35,27 @@ export default function RespMenu({ user, admin, setUser, logout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Fetch messages and calculate unread count
+  useEffect(() => {
+    const getMessages = async () => {
+      if (admin) {
+        try {
+          const response = await axios.get(`${BACKEND_URL}/admin/uzenetek`, {
+            headers: { "x-user-id": user.uid },
+          });
+          const unreadCount = response.data.data.filter(
+            (msg) => !msg.isAnswered
+          ).length;
+          setUnreadMessages(unreadCount);
+        } catch (error) {
+          console.error("Error fetching messages:", error);
+        }
+      }
+    };
+
+    getMessages();
+  }, [user, admin]);
 
   return (
     <Stack
@@ -76,7 +101,15 @@ export default function RespMenu({ user, admin, setUser, logout }) {
                 selected={pathname === `/${!admin ? "openticket" : "admin"}`}
                 className="hover:bg-gray-700"
               >
-                <SupportIcon className="mr-2" />
+                <Badge
+                  badgeContent={unreadMessages > 0 ? unreadMessages : null}
+                  color="error"
+                  overlap="circular"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                ></Badge>
                 {!admin ? "Ügyfélszolgálat" : "Admin"}
               </MenuItem>
             </Link>
@@ -117,15 +150,25 @@ export default function RespMenu({ user, admin, setUser, logout }) {
               </Button>
             </Link>
             <Link to={!admin ? "/openticket" : "/admin"}>
-              <Button
-                variant={
-                  pathname === `/${!admin ? "openticket" : "admin"}`
-                    ? "outlined"
-                    : "contained"
-                }
+              <Badge
+                badgeContent={unreadMessages > 0 ? unreadMessages : null}
+                color="error"
+                overlap="circular"
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
               >
-                {!admin ? "Ügyfélszolgálat" : "Admin"}
-              </Button>
+                <Button
+                  variant={
+                    pathname === `/${!admin ? "openticket" : "admin"}`
+                      ? "outlined"
+                      : "contained"
+                  }
+                >
+                  {!admin ? "Ügyfélszolgálat" : "Admin"}
+                </Button>
+              </Badge>
             </Link>
           </ButtonGroup>
         </Stack>

@@ -80,8 +80,14 @@ export default function About() {
               Cseh Lajos Gergő
             </h2>
             <p className="text-gray-700 mb-4">
-              Frontend fejlesztő, aki a felhasználói élmény és az interaktív
-              weboldalak fejlesztésére koncentrál.
+              19 éves vagyok, és a Kecskeméti Kandó Kálmán Technikumba járok.
+              Informatikai területen szeretnék elhelyezkedni, és a webfejlesztés
+              iránt érdeklődöm. A frontend és backend fejlesztés is érdekel, de
+              a backend fejlesztés áll hozzám közelebb. A weboldal elkészítése
+              során sok új dolgot tanultam, és remélem, hogy a jövőben is
+              folytathatom a tanulást és fejlődést ezen a területen. Persze a
+              játékok fejlesztése is érdekel, de az egyenlőre csak hobbi szinten
+              van.'
             </p>
             <img
               src={csehGeri}
