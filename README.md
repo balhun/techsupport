@@ -24,6 +24,7 @@ Ha nem vagyunk bejelentkezve átirányit a login oldalra. Felhasználótól és 
 Viszont ha adminként vagyunk bejelentkezve, akkor a fehér részen egy nagy gomb látható ami átírányít az admin felületre.
 
 ![Profile oldalról kép](https://github.com/balhun/techsupport/blob/master/images/profile.png)
+![Profile oldalról kép](https://github.com/balhun/techsupport/blob/master/images/adminprofile.png)
 
 ### Admin
 Az adminok ezen az oldalon tudják menedzselni a beérkező jegyeket. A "/admin" vezet erre az oldalra. Ha nem adminként vagy bejelentkezve, automatikusan átirányít a főoldalra. Az oldal baloldalán találhatók a még nyitott, megválaszolásra váró segítségek. Jobboldalon pedig a már megválaszolt jegyek. Ezen az oldaon Sok a Material UI-os element, Jól lehet látni a MUI használatát.
