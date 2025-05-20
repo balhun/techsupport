@@ -61,12 +61,14 @@ export default function About() {
         <div className="flex justify-between gap-6">
           <div className="w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">
-              Hunor Balázs
+              Balázs Hunor
             </h2>
             <p className="text-gray-700 mb-4">
-              Webfejlesztő, aki a backend és frontend technológiákra
-              specializálódott. Érdeklődik a modern JavaScript keretrendszerek
-              iránt.
+              Kecskeméten a Kandó Kálmán Technikumba járok és 19 éves vagyok.
+              Informatikában a játékfejlesztés érdekel leginkább, bár tudom, hogy
+              sok matekra és fizikára van szükségem hozzá. Emellett nem szeretnék
+              eltávolodni a webfejlesztéstől sem, ezen belül leginkább a frontend érdekel.
+              Jövőre kezdem az egyetemet, és meglátom, hogy mit hoz nekem a jövő.
             </p>
             <img
               src={hunorBalazs}
