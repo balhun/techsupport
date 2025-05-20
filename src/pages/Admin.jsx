@@ -85,7 +85,7 @@ export default function Admin({ admin, user }) {
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left", "text-transform" : "none"}}
+                    sx={{ textAlign: "left", "testTransform" : "none"}}
                   >
                     {msg.cim}
                   </Button>
@@ -129,7 +129,7 @@ export default function Admin({ admin, user }) {
                           variant="contained"
                           color="primary"
                           onClick={() => handleSendResponse(msg.id)}
-                          style={{ margin: "8px", "text-transform" : "none"}}
+                          style={{ margin: "8px", "testTransform" : "none"}}
                         >
                           Válasz Küldése
                         </Button>
@@ -158,7 +158,7 @@ export default function Admin({ admin, user }) {
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left", "text-transform" : "none" }}
+                    sx={{ textAlign: "left", "testTransform" : "none" }}
                   >
                     {msg.cim}
                   </Button>
