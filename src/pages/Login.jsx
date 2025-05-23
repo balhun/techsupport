@@ -31,7 +31,6 @@ export default function Login({
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  
 
   async function login() {
     try {
@@ -67,7 +66,6 @@ export default function Login({
           });
           //setSuccessRegist(true);
         });
-
       } catch (err) {
         if (felhasznalonev.length < 6) {
           setError(true);
@@ -85,7 +83,6 @@ export default function Login({
       }
     }
   }
-
 
   async function GoogleLogIn() {
     await signInWithPopup(auth, new GoogleAuthProvider());
