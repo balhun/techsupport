@@ -1,53 +1,61 @@
-# [Tech Support](https://techsupport-uzb8.onrender.com/) - Fejlesztés alatt
 
-Egy egyszerű intuitív Tech Support platform. :tada:
+# [Tech Support](https://techsupport-uzb8.onrender.com/) – Under Development
 
-Az oldal linkje: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.onrender.com/)
+A simple and intuitive Tech Support platform. :tada:
 
-## A Weboldal jellemzői
-- **Regisztrálás és Bejelentkezés:** A felhasználók be regisztrálni és bejelentkezni tudnak, hogy hozzáférjenek a weboldalhoz.
-- **Profilkép csere:** Felhasználók és adminok egyaránt meg tudják változtatni profilképüket egy személyre szabottabb élményért.
-- **Jegy létrehozás:** A Felhasználók "support ticketet" tudnak nyitni, hogy segítséget kérhessenek az adminoktól.
-- **Admin jegy menedzsment:** Az adminok meg tudják tekinteni a jegyeket amiket ők kaptak, válaszolni rá és ezzel lezárni a jegyeket.
+Website link: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.onrender.com/)
 
-## Használt technológiák a frontendhez
-- React, Tailwind, Axios, Material UI, Firebase, Cloudinary, Javascript, HTML, CSS, Vitest
+## Website Features
+- **Registration and Login:** Users can register and log in to access the platform.
+- **Profile Picture Update:** Both users and admins can change their profile pictures for a more personalized experience.
+- **Create Support Ticket:** Users can open a "support ticket" to request help from admins.
+- **Admin Ticket Management:** Admins can view the tickets assigned to them, respond to them, and mark them as resolved.
 
-## A dokumentáció oldalakra bontva:
+## Technologies Used for the Frontend
+- React, Tailwind, Axios, Material UI, Firebase, Cloudinary, JavaScript, HTML, CSS, Vitest
+
+## Documentation by Page:
 ### Home
-Egy egyszerű főoldal. A "/" erre az oldalra vezet. Tailwind használata erősen látható ezen az oldalon, mivel animált h1-et készítettünk. Próbáltunk egy professzionális bemutatkozót készíteni, hogy minél több felhasználót ragadjon meg a szolgáltatásaink.
+A simple homepage. The "/" route leads here. Tailwind is heavily used on this page, including an animated `<h1>`. We aimed to create a professional introduction to attract as many users as possible to our services.
 
-![Home oldalról kép](https://github.com/balhun/techsupport/blob/master/images/home.png)
+![Home Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/home.png)
 
 ### Profile
-Ha nem vagyunk bejelentkezve átirányit a login oldalra. Felhasználótól és admintól függ, hogy mit láthatunk az oldalon. Viszont a baloldali fehér rész mindekettőnek ugyan az, egy egyszerű személyes adatokat és profilképet szerkesztő felület. Ha felhasználóként vagyunk bejelentkezve, akkor a jobb oldali fehér részen a jegyeid láthatod. Legyen az nyitott vagy már megválaszolt. Ha még nincs megválaszolva, egy MUI <Alert>-el értesítjük a felhasználót.
-Viszont ha adminként vagyunk bejelentkezve, akkor a fehér részen egy nagy gomb látható ami átírányít az admin felületre.
+If the user is not logged in, they are redirected to the login page. The content depends on whether the user is an admin or a regular user. However, the left white section is the same for both—an interface for editing personal details and profile pictures. 
 
-![Profile oldalról kép](https://github.com/balhun/techsupport/blob/master/images/profile.png)
-![Admin profile oldalról kép](https://github.com/balhun/techsupport/blob/master/images/adminprofile.png)
+If logged in as a user, the right white section displays your support tickets—whether they are open or already answered. If a ticket hasn’t been answered yet, we notify the user with a MUI `<Alert>`.
+
+If logged in as an admin, the right section shows a large button that redirects to the admin dashboard.
+
+![Profile Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/profile.png)  
+![Admin Profile Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/adminprofile.png)
 
 ### Admin
-Az adminok ezen az oldalon tudják menedzselni a beérkező jegyeket. A "/admin" vezet erre az oldalra. Ha nem adminként vagy bejelentkezve, automatikusan átirányít a főoldalra. Az oldal baloldalán találhatók a még nyitott, megválaszolásra váró segítségek. Jobboldalon pedig a már megválaszolt jegyek. Ezen az oldaon Sok a Material UI-os element, Jól lehet látni a MUI használatát.
+Admins manage incoming tickets on this page. The "/admin" route leads here. If you're not logged in as an admin, you’re automatically redirected to the homepage. 
 
-![Admin oldalról kép](https://github.com/balhun/techsupport/blob/master/images/admin.png)
+The left side of the page lists open tickets awaiting responses. The right side lists already answered tickets. This page showcases heavy usage of Material UI components.
+
+![Admin Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/admin.png)
 
 ### OpenTicket
-A menüben ennek az oldalnak a gombja lecserélődik egy Admin gombra, ha adminként vagyunk bejelentkezve. A "/openticket"-el juthatunk ide. Két beviteli mező és egy gomb van előttünk, egyik cím másik a hosszű szöveg. A gombal pedig elküldjük. Viszont ha nem vagyunk bejelentkezve akkor egy üzenetet láthatunk ezzel kapcsolatban.
+In the menu, this page’s button is replaced by an "Admin" button if you're logged in as an admin. The route "/openticket" takes you here. The page has two input fields and a button—one for the title and one for the message. The button submits the form. If the user isn’t logged in, a message is displayed instead.
 
-![OpenTicket oldalról kép](https://github.com/balhun/techsupport/blob/master/images/openticket.png)
+![OpenTicket Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/openticket.png)
 
 ### Login
-Ez az oldal ha már be vagyunk jelentkezve akkor átirányít, viszont ha nem akkor ez a "/login" oldal. Alapesetben nem lehet erre az oldalra jutni amúgy sem, ha már be vagyunk jelentkezve, viszont linken keresztül igen, ezért irányítunk át. Ezen az oldalon baloldalt bejelentkezés, elfelejtett jelszó gomb, és google bejelentkezés látható. Jobboldalon pedig regisztrálni lehet, logikusan felhasználónév, email, jelszó...
+If you're already logged in, you're redirected. If not, this is the "/login" page. Normally, logged-in users cannot access this page unless they manually enter the URL, in which case they are redirected. 
 
-![Login oldalról kép](https://github.com/balhun/techsupport/blob/master/images/login.png)
+The left side includes login, forgot password, and Google login options. On the right, there is a registration form requiring a username, email, and password.
+
+![Login Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/login.png)
 
 ### About
-A "/about" egy egyszerű oldal amiben leírjuk melyik oldalnak mi a funkciója, és a két fejlesztőről információk.
+The "/about" page provides a brief description of the functionality of each page and information about the two developers.
 
-![About oldalról kép](https://github.com/balhun/techsupport/blob/master/images/about.png)
+![About Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/about.png)
 
 ### ResetPassword
-Ha véletlen elvelejtette volna valaki a jelszavát, ezzel egy újat tud generálni. "/forgotpassword"
+In case someone forgets their password, they can generate a new one here. Route: "/forgotpassword"
 
 ### NotFound
-Egy egyszerű oldal amit akkor látunk ha rossz url-t adunk meg.
+A simple page displayed when an incorrect URL is entered.
