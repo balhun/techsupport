@@ -140,7 +140,7 @@ export default function Login({
                 Bejelentkezés
               </Button>
             </Link>
-            <p className="">--Or continue with--</p>
+            <p className="text-gray-500">Vagy jelentkez be így</p>
             <Link to="/profile" sx={{ width: "320px" }}>
               <img
                 src="./google.png"

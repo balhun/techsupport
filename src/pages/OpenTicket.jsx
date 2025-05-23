@@ -38,7 +38,7 @@ export default function OpenTicket({ user }) {
           align="center"
           className="text-gray-800 font-semibold"
         >
-          Open a Support Ticket
+          Hibajegy megnyitása
         </Typography>
         {user ? null : (
           <Typography variant="body2" align="center" className="text-gray-600">

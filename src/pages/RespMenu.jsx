@@ -18,7 +18,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
 
-export default function RespMenu({ user, admin, logout }) {
+export default function RespMenu({ user, admin, logout, unreadMessages }) {
   const { pathname } = useLocation();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -26,7 +26,6 @@ export default function RespMenu({ user, admin, logout }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-  const [unreadMessages, setUnreadMessages] = useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,25 +35,7 @@ export default function RespMenu({ user, admin, logout }) {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    const getMessages = async () => {
-      if (admin) {
-        try {
-          const response = await axios.get(`${BACKEND_URL}/admin/uzenetek`, {
-            headers: { "x-user-id": user.uid },
-          });
-          const unreadCount = response.data.data.filter(
-            (msg) => !msg.isAnswered
-          ).length;
-          setUnreadMessages(unreadCount);
-        } catch (error) {
-          console.error("Error fetching messages:", error);
-        }
-      }
-    };
 
-    getMessages();
-  }, [user, admin]);
 
   return (
     <Stack

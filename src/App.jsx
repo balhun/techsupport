@@ -25,6 +25,8 @@ export const auth = getAuth(app);
 function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
+  const [unreadMessages, setUnreadMessages] = useState(0);
+
   /*const [successRegist, setSuccessRegist] = useState(false);
   useEffect(() => {
     setTimeout(setSuccessRegist(false), 5000);
@@ -50,14 +52,35 @@ function App() {
     return () => unsubscribe;
   }, []);
 
+  useEffect(() => {
+    const getMessages = async () => {
+      if (admin) {
+        try {
+          const response = await axios.get(`${BACKEND_URL}/admin/uzenetek`, {
+            headers: { "x-user-id": user.uid },
+          });
+          const unreadCount = response.data.data.filter(
+            (msg) => !msg.isAnswered
+          ).length;
+          setUnreadMessages(unreadCount);
+        } catch (error) {
+          console.error("Error fetching messages:", error);
+        }
+      }
+    };
+
+    getMessages();
+  }, [user, admin]);
+
   async function logout() {
+    setUnreadMessages(0);
     await signOut(auth);
   }
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout user={user} admin={admin} logout={logout} />,
+      element: <Layout user={user} admin={admin} logout={logout} unreadMessages={unreadMessages} />,
       children: [
         { path: "/", element: <Home /> },
         {
