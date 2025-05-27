@@ -35,8 +35,6 @@ export default function RespMenu({ user, admin, logout, unreadMessages }) {
     setAnchorEl(null);
   };
 
-
-
   return (
     <Stack
       direction="row"
@@ -79,7 +77,12 @@ export default function RespMenu({ user, admin, logout, unreadMessages }) {
               <MenuItem
                 onClick={handleClose}
                 selected={pathname === `/${!admin ? "openticket" : "admin"}`}
-                className="hover:bg-gray-700"
+                className="hover:bg-gray-700 "
+                sx={{
+                  display: "flex",
+                  flexDirection: "row-reverse",
+                  justifyContent: "space-between",
+                }}
               >
                 <Badge
                   badgeContent={unreadMessages > 0 ? unreadMessages : null}
@@ -102,7 +105,8 @@ export default function RespMenu({ user, admin, logout, unreadMessages }) {
                   handleClose();
                   logout();
                 }}
-                className="hover:bg-gray-700"
+                className="hover:bg-gray-700 "
+                sx={{ color: "white" }}
               >
                 <LogoutIcon className="mr-2" />
                 Kijelentkezés

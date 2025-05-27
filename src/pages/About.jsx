@@ -58,17 +58,18 @@ export default function About() {
           </ul>
         </div>
 
-        <div className="flex justify-between gap-6">
-          <div className="w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
+        <div className="flex sm:flex-col md:flex-row  justify-between gap-6">
+          <div className="sm:w-full md:w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">
               Balázs Hunor
             </h2>
             <p className="text-gray-700 mb-4">
               Kecskeméten a Kandó Kálmán Technikumba járok és 19 éves vagyok.
-              Informatikában a játékfejlesztés érdekel leginkább, bár tudom, hogy
-              sok matekra és fizikára van szükségem hozzá. Emellett nem szeretnék
-              eltávolodni a webfejlesztéstől sem, ezen belül leginkább a frontend érdekel.
-              Jövőre kezdem az egyetemet, és meglátom, hogy mit hoz nekem a jövő.
+              Informatikában a játékfejlesztés érdekel leginkább, bár tudom,
+              hogy sok matekra és fizikára van szükségem hozzá. Emellett nem
+              szeretnék eltávolodni a webfejlesztéstől sem, ezen belül leginkább
+              a frontend érdekel. Jövőre kezdem az egyetemet, és meglátom, hogy
+              mit hoz nekem a jövő.
             </p>
             <img
               src={hunorBalazs}
@@ -77,7 +78,7 @@ export default function About() {
             />
           </div>
 
-          <div className="w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
+          <div className="sm:w-full md:w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">
               Cseh Lajos Gergő
             </h2>

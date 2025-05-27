@@ -55,3 +55,4 @@ describe("OpenTicket Component", () => {
     expect(openTicketText).toBeInTheDocument();
   });
 });
+ 
