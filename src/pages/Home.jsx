@@ -1,64 +1,179 @@
-import { Button } from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import SpeedIcon from "@mui/icons-material/Speed";
+import { styled } from "@mui/system";
+
+const GradientCard = styled("div")(({ theme }) => ({
+  background: `linear-gradient(145deg, ${
+    theme.palette?.background?.paper || "#ffffff"
+  } 0%, #fdf6e3 100%)`,
+  borderRadius: "20px",
+  padding: "2rem",
+  boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+  transition: "transform 0.3s ease",
+  "&:hover": {
+    transform: "translateY(-5px)",
+  },
+}));
+
+const FeatureItem = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem",
+  padding: "1rem",
+  background: "rgba(255,255,255,0.9)",
+  borderRadius: "12px",
+  margin: "1rem 0",
+});
 
 export default function Home() {
+  const theme = useTheme();
+
   return (
-    <div className='lg:flex justify-evenly block mt-5 gap-5'> {/*Magamnak: Itt még van mit dolgozni */}
-      <div className='bg-white rounded-xl glowing p-3 ml-5 mr-5'>
-        <h1 className="flex text-xl md:text-xl lg:text-3xl xl:text-4xl mb-2 cursor-default">
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">Egy</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">jobb</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">támogatási</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">tapasztalat.</span>
-        </h1>
-        <span className='block italic ml-10'>A Megbízható Partnered Technikai Kihívások Megoldásában</span>
-        <h1 className='flex text-xl md:text-xl lg:text-3xl xl:text-4xl cursor-default mt-10'>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">Mi</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">kiállunk</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">Ön</span>
-          <span className="p-1 transition-colors duration-700 ease-in-out hover:bg-orange-400 hover:rounded-lg rounded-lg">Mögött</span>
-        </h1>
-        <span className='block mt-5'>
-          A Kandó's Tech™ csapatában tudjuk, milyen frusztrálóak lehetnek a technikai problémák.<br />
-          Ezért vagyunk itt, hogy gyors, megbízható és szakértő segítséget nyújtsunk, amikor csak szüksége van rá.<br />
-          Legyen szó apró hibáról vagy komoly rendszerösszeomlásról, csak egy jegy leadása választ el minket egymástól.<br />
-        </span>
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        {/* Hero Section */}
+        <GradientCard className="flex flex-col justify-between">
+          <div>
+            <Typography
+              variant="h2"
+              component="h1"
+              className="mb-6 gradient-text"
+            >
+              Technikai támogatás,
+              <br />
+              <span className="text-orange-500">amit érdemelsz</span>
+            </Typography>
+
+            <Typography variant="h5" className="mb-8 text-gray-600">
+              Profi segítség egy kattintásnyira. Legyen bármi a gond,
+              <br />
+              mi gyorsan és hatékonyan megoldjuk.
+            </Typography>
+
+            <Button
+              component={Link}
+              to="/openticket"
+              variant="contained"
+              size="large"
+              sx={{
+                background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                fontSize: "1.1rem",
+                padding: "12px 32px",
+                borderRadius: "50px",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0 8px 24px rgba(255,87,34,0.3)",
+                },
+              }}
+            >
+              Segítségkérés most
+            </Button>
+          </div>
+
+          <div className="mt-8 flex gap-4 text-gray-600">
+            <FeatureItem>
+              <SpeedIcon fontSize="large" color="primary" />
+              <div>
+                <h3 className="text-xl font-bold">Gyors válaszidő</h3>
+                <p>Átlag 15 percen belül</p>
+              </div>
+            </FeatureItem>
+          </div>
+        </GradientCard>
+
+        {/* Why Choose Us */}
+        <div className="space-y-6">
+          <div className="p-6 bg-white rounded-2xl shadow-lg">
+            <Typography variant="h4" className="mb-4 font-bold">
+              Miért válasszon minket?
+            </Typography>
+
+            <div className="space-y-4">
+              <FeatureItem>
+                <CheckCircleIcon color="success" fontSize="large" />
+                <div>
+                  <h4 className="text-lg font-semibold">
+                    Garantált megoldások
+                  </h4>
+                  <p className="text-gray-600">
+                    Szakértőinkkel 100%-os megoldási arány
+                  </p>
+                </div>
+              </FeatureItem>
+
+              <FeatureItem>
+                <SupportAgentIcon color="primary" fontSize="large" />
+                <div>
+                  <h4 className="text-lg font-semibold">24/7 Elérhetőség</h4>
+                  <p className="text-gray-600">
+                    Non-stop támogatás, amikor csak szükséged van rá
+                  </p>
+                </div>
+              </FeatureItem>
+            </div>
+          </div>
+
+          {/* Contact Card */}
+          <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg">
+            <Typography variant="h5" className="mb-4 font-bold">
+              Személyre szabott segítség
+            </Typography>
+            <Typography className="mb-4 text-gray-600">
+              Írjon nekünk közvetlenül, és egy dedikált szakértő fogja kezelni
+              az ügyét.
+            </Typography>
+            <Button
+              component={Link}
+              to="/openticket"
+              variant="outlined"
+              size="large"
+              startIcon={<SupportAgentIcon />}
+              sx={{
+                borderWidth: "2px",
+                borderRadius: "12px",
+                "&:hover": {
+                  borderWidth: "2px",
+                  background: "rgba(255,255,255,0.9)",
+                },
+              }}
+            >
+              Ügyintézés indítása
+            </Button>
+          </div>
+        </div>
       </div>
-      <div className='bg-white rounded-xl glowing p-3 lg:mt-0 lg:mb-0 mb-5 mt-5 mr-5 ml-5 homeRight'>
-        <h1 className='text-2xl border-b-2 pb-2'>Üdvözöljük a Kandó's Tech Technikai Támogatás oldalán</h1>
-        <p className='mb-5'>
-            Azért vagyunk itt, hogy a lehető legfelhasználóbarátabb útmutatóval megoldjuk az ön technikai problémáit. Legyen szó szoftverhibáról, hardverproblémáról vagy csak útmutatásra 
-            van szüksége valamely program használatához, nálunk megtalálja a választ.
-        </p>
-        <p className='mb-5'>
-            Elkötelezett támogatási csapatunk készen áll, hogy segítsen Önnek bármilyen kérdésben, csak küldjön nekünk, 
-            hogy személyre szabott segítséget kapjon tőlünk.
-        </p>
 
-        <h3 className='text-2xl border-b-2 pb-2'>Vegye Fel Velünk a Kapcsolatot – Személyes Segítségnyújtás</h3>
-        <p>
-            Néha egy szakértő segítsége a legjobb megoldás. Ha nem találja a választ, vagy speciális segítségre van 
-            szüksége, támogató csapatunk készen áll, hogy csevegő platformunkon keresztül segítse Önt.
-        </p>
-        <Link to='/openticket'><Button>Kapcsolatfelvétel</Button></Link>
+      {/* Features Section */}
+      <div className="grid md:grid-cols-3 gap-8 mt-16">
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <SpeedIcon fontSize="large" color="primary" />
+          <h3 className="text-xl font-bold my-4">Azonnali válaszok</h3>
+          <p className="text-gray-600">
+            Intelligens chatbotunk azonnali válaszokkal szolgál gyakori
+            kérdésekre
+          </p>
+        </div>
 
-        <h2 className='text-xl border-b-2 pb-2 pt-2'>Miért válassza a <strong>Kandó's Tech</strong> támogatását?</h2>
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <SupportAgentIcon fontSize="large" color="primary" />
+          <h3 className="text-xl font-bold my-4">Szakértői segítség</h3>
+          <p className="text-gray-600">
+            Hitelesített szakembereinkkel minden probléma megoldható
+          </p>
+        </div>
 
-        <ul className='pb-2'>
-            <li>1. <strong>Gyors és megbízható segítség</strong> – Célunk, hogy minél hamarabb hatékony megoldást nyújtsunk.</li>
-            <li>2. <strong>Szakértői támogatás</strong> – Képzett szakembereink készséggel válaszolnak minden technikai kérdésére.</li>
-            <li>3. <strong>Felhasználóbarát válaszok</strong> – Könnyen követhető lépések és érthető magyarázatok a problémák gyors megoldásához.</li>
-        </ul>
-
-        <p className='pt-2 border-t-2 pb-5'>
-            Hiszünk abban, hogy a technikai támogatásnak egyszerűnek és stresszmentesnek kell lennie. Ezért hoztunk létre 
-            egy olyan platformot, amely a világos információkat, a hatékonyságot és a szakértői útmutatást helyezi előtérbe. 
-            Bármi legyen is a probléma, elkötelezettek vagyunk abban, hogy megtaláljuk a legjobb megoldást.
-        </p>
-        <h2 className='text-4xl mb-5'>Kezdjük el!</h2>
-        <Link to='/openticket'><Button variant='contained'>Segítség Kérése</Button></Link>
+        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <CheckCircleIcon fontSize="large" color="primary" />
+          <h3 className="text-xl font-bold my-4">Minőségbiztosítás</h3>
+          <p className="text-gray-600">
+            Minden megoldásunkat kettős ellenőrzéssel látjuk el
+          </p>
+        </div>
       </div>
     </div>
-  )
+  );
 }

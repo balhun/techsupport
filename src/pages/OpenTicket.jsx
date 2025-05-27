@@ -3,6 +3,7 @@ import { Button, Typography, Box, Link } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
 import { useNavigate } from "react-router-dom";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 export default function OpenTicket({ user }) {
   const [text, setText] = useState("");
@@ -10,7 +11,7 @@ export default function OpenTicket({ user }) {
   const [success, setSuccess] = useState(false);
   const maxLength = 512;
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const Change = (event) => {
     if (event.target.value.length <= maxLength) {
@@ -31,76 +32,153 @@ export default function OpenTicket({ user }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 my-50 middle">
-      <Box className="bg-white glowing shadow-lg rounded-2xl p-6 space-y-6 w-full max-w-lg md:max-w-2xl lg:max-w-4xl island glowing">
+    <div className="flex flex-col items-center justify-center p-4 my-8">
+      <Box
+        sx={{
+          background: "linear-gradient(145deg, #ffffff, #f8f9fa)",
+          borderRadius: 4,
+          boxShadow: 3,
+          p: 4,
+          width: "100%",
+          maxWidth: "800px",
+          position: "relative",
+          "&:before": {
+            content: '""',
+            position: "absolute",
+            top: -2,
+            left: -2,
+            right: -2,
+            bottom: -2,
+            background: "linear-gradient(45deg, #4facfe 0%, #00f2fe 100%)",
+            borderRadius: 5,
+            zIndex: -1,
+            animation: "gradient 3s ease infinite",
+          },
+          "@keyframes gradient": {
+            "0%": { opacity: 0.3 },
+            "50%": { opacity: 0.6 },
+            "100%": { opacity: 0.3 },
+          },
+        }}
+      >
         <Typography
-          variant="h5"
-          align="center"
-          className="text-gray-800 font-semibold"
+          variant="h4"
+          component="h1"
+          sx={{
+            mb: 4,
+            fontWeight: "bold",
+            textAlign: "center",
+            color: "primary.main",
+            textTransform: "uppercase",
+            letterSpacing: 1.2,
+          }}
         >
-          Hibajegy megnyitása
+          Hibajegy Nyitása
         </Typography>
-        {user ? null : (
-          <Typography variant="body2" align="center" className="text-gray-600">
-            Létrehozhat új jegyet, ha be van{" "}
-            <Link className="text-blue-700 underline cursor-pointer"  to="/login"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("/login");
-            }}>
-              jelentkezve
-            </Link>
-            .
-          </Typography>
+
+        {!user && (
+          <Box textAlign="center" sx={{ mb: 4 }}>
+            <Typography variant="body1" sx={{ color: "text.secondary", mb: 1 }}>
+              A jegynyitáshoz be kell jelentkeznie
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/login")}
+              sx={{
+                borderRadius: 2,
+                px: 4,
+                py: 1,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+              }}
+            >
+              Bejelentkezés
+            </Button>
+          </Box>
         )}
-        {user ? (
+
+        {user && (
           <>
-            <Box>
-              <textarea
+            <Box sx={{ mb: 3 }}>
+              <input
                 value={cim}
                 onChange={(e) => setCim(e.target.value)}
-                rows="1"
-                className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Téma"
-              ></textarea>
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium"
+              />
+            </Box>
+
+            <Box sx={{ position: "relative", mb: 2 }}>
               <textarea
                 value={text}
                 onChange={Change}
-                rows="11"
-                className="w-full mt-4 border resize-none border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Problémád ide írd..."
-              ></textarea>
+                rows={8}
+                placeholder="Írja le részletesen a problémát..."
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              />
               <Typography
-                variant="body2"
-                align="right"
-                className="text-gray-500 mt-1"
+                variant="caption"
+                sx={{
+                  position: "absolute",
+                  right: 10,
+                  bottom: 10,
+                  color:
+                    text.length === maxLength ? "error.main" : "text.secondary",
+                  backgroundColor: "background.paper",
+                  px: 1,
+                  borderRadius: 1,
+                }}
               >
-                Betűszám: {text.length}/{maxLength}{" "}
+                {text.length}/{maxLength}
               </Typography>
             </Box>
+
             {success && (
               <Box
-                className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4"
-                role="alert"
+                sx={{
+                  backgroundColor: "success.light",
+                  color: "success.dark",
+                  p: 2,
+                  borderRadius: 2,
+                  mb: 3,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
               >
-                <strong className="font-bold">Siker!</strong>
-                <span className="block sm:inline"> Üzenet elküldve!</span>
+                <CheckCircleIcon sx={{ fontSize: 20 }} />
+                <Typography variant="body2">
+                  Üzenet sikeresen elküldve!
+                </Typography>
               </Box>
             )}
-            <Box display="flex" justifyContent="center">
-              <Button
-                variant="contained"
-                onClick={adduzenet}
-                color="primary"
-                size="large"
-                className="w-full md:w-auto px-6 mt-4"
-                disabled={text.length === 0 || cim.length === 0}
-              >
-                Küldés
-              </Button>
-            </Box>
+
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={adduzenet}
+              disabled={!text.trim() || !cim.trim()}
+              sx={{
+                py: 2,
+                borderRadius: 2,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: 1.1,
+                transition: "all 0.3s ease",
+                "&:disabled": {
+                  opacity: 0.7,
+                  bgcolor: "grey.300",
+                },
+                "&:hover": {
+                  transform: "translateY(-1px)",
+                },
+              }}
+            >
+              Küldés
+            </Button>
           </>
-        ) : null}
+        )}
       </Box>
     </div>
   );
