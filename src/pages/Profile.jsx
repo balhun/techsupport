@@ -108,7 +108,7 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
     } else {
       alert("Túl nagy a fájl (5mb max)");
     }
-  };
+};
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -186,14 +186,15 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                     variant="contained"
                     tabIndex={-1}
                     startIcon={<CloudUpload />}
-                    sx={{ "text-transform": "none" }}
+                    sx={{ "textTransform": "none" }}
                   >
                     Fájl feltöltése
                     <VisuallyHiddenInput
+                      type="file" // <-- make sure this is set!
                       accept=".png, .jpg, .gif"
                       onChange={ProfilePictureChange}
                       disabled={uploading}
-                      multiple
+                      multiple={false}
                     />
                   </Button>
                   {uploading && (
@@ -248,7 +249,7 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
               </div>
               <div className="flex flex-row justify-between">
                 <Button
-                  sx={{ "text-transform": "none" }}
+                  sx={{ "textTransform": "none" }}
                   className={admin ? "w-full py-2 rounded-lg hover:bg-blue-600 hover:text-white" : "w-3/4 py-2 rounded-lg hover:bg-blue-600 hover:text-white"}
                   onClick={SaveChanges}
                 >
@@ -256,7 +257,7 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                 </Button>
                 {admin ? "" :
                 <Button
-                  sx={{ "text-transform": "none" }}
+                  sx={{ "textTransform": "none" }}
                   className="hover:bg-red-600 bg-red-500 hover:text-white"
                   onClick={fioktorles}
                 >
@@ -274,7 +275,6 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                 <Divider />
                 
                 <div className="flex flex-1 overflow-hidden">
-                  {/* Message list */}
                   <div className="min-w-52 border-r overflow-y-auto">
                       <List>
                         {messages.map((message) => (
@@ -296,11 +296,9 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                         ))}
                       </List>
                   </div>
-                  
-                  {/* Message detail */}
-                  {console.log(singleMessages)}
+                
                   <div className="p-4 overflow-y-auto">
-                    {singleMessages ? (
+                    {messages.length > 0 ? (
                       <div>
                         <Typography variant="h5" gutterBottom>
                           {singleMessages.cim}
