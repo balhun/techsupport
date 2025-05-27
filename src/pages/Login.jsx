@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import Passwordshow from "../Componens/Passwordshow";
+import { Google } from "@mui/icons-material";
 
 export default function Login({
   auth,
@@ -118,12 +119,7 @@ export default function Login({
               }}
               label="Jelszó"
             />
-            <Link
-              href="/forgotpassword"
-              sx={{ textDecoration: "none", color: "#4b5563" }}
-            >
-              Elfelejtett jelszó
-            </Link>
+
             {loginError ? (
               <Alert severity="error" variant="filled" sx={{ width: "320px" }}>
                 Hibás Email vagy jelszó
@@ -137,13 +133,31 @@ export default function Login({
               </Button>
             </Link>
             <p className="text-gray-500">Vagy jelentkez be így</p>
-            <Link to="/profile" sx={{ width: "320px" }}>
-              <img
-                src="./google.png"
-                className="flex m-auto cursor-pointer w-4/5"
-                onClick={GoogleLogIn}
-                alt=""
-              />
+            <Button
+              startIcon={<Google />}
+              variant="outlined"
+              onClick={GoogleLogIn}
+              sx={{
+                borderColor: "text.secondary",
+                color: "text.primary",
+                "&:hover": {
+                  borderColor: "primary.main",
+                  color: "primary.main",
+                },
+              }}
+            >
+              Continue with Google
+            </Button>
+
+            <Link
+              href="/forgotpassword"
+              sx={{
+                textAlign: "center",
+                color: "text.secondary",
+                "&:hover": { color: "primary.main" },
+              }}
+            >
+              Forgot Password?
             </Link>
           </form>
           <form

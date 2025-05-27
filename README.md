@@ -59,3 +59,9 @@ In case someone forgets their password, they can generate a new one here. Route:
 
 ### NotFound
 A simple page displayed when an incorrect URL is entered.
+
+### Development ideas
+- AI Assistant
+- Image upload to help
+- Extending help and not just about technology
+-Better security
