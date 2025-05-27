@@ -58,7 +58,7 @@ export default function About() {
           </ul>
         </div>
 
-        <div className="flex sm:flex-col md:flex-row  justify-between gap-6">
+        <div className="flex flex-col md:flex-row  justify-between gap-6">
           <div className="sm:w-full md:w-1/2 p-5 glowing bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-center text-blue-600 mb-4">
               Balázs Hunor

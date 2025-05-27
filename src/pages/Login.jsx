@@ -92,10 +92,9 @@ export default function Login({
   return (
     <>
       {!user ? (
-        <div className="justify-evenly md:mt-20 mt-2 flex flex-col md:flex-row gap-2 md:items-start items-center">
-          <Stack
-            gap={2}
-            className="island glowing w-fit h-fit flex justify-center items-center p-5 shadow-black"
+        <div className="justify-evenly mt-2 flex flex-col md:flex-row gap-2 md:items-start items-center">
+          <form
+            className="island glowing w-fit h-fit flex flex-col gap-4 justify-center items-center p-5 shadow-black"
           >
             <h1 className="text-center text-2xl">Jelentkezz be itt!</h1>
             <TextField
@@ -146,10 +145,9 @@ export default function Login({
                 alt=""
               />
             </Link>
-          </Stack>
-          <Stack
-            gap={2}
-            className="glowing island w-fit h-fit flex flex-col md:flex-row justify-center items-center p-5 mt-8 md:mt-0"
+          </form>
+          <form
+            className="glowing island w-fit h-fit flex flex-col justify-center items-center p-5 gap-4"
           >
             <h1 className="text-center text-2xl">Regisztrálj itt!</h1>
             <TextField
@@ -192,25 +190,10 @@ export default function Login({
               }}
               label="Jelszó megerősítés"
             />
-            {/*error ? (
-              <Alert severity="error" variant="filled" sx={{ width: "320px" }}>
-                {errorMessage}
-              </Alert>
-            ) : successRegist ? (
-              <Alert
-                severity="success"
-                variant="filled"
-                sx={{ width: "320px" }}
-              >
-                Sikeres regisztráció!
-              </Alert>
-            ) : (
-              ""
-            )*/}
             <Button variant="contained" className="w-80" onClick={regist}>
               Regisztrálás
             </Button>
-          </Stack>
+          </form>
         </div>
       ) : (
         <Navigate to="/profile" replace />

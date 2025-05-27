@@ -11,7 +11,7 @@ export default function RespFooter() {
   //Mivel a gombok egy Link nem lehet sima tailwindel szerkeszteni. cssben kell.
 
   return (
-    <footer className={`bottom-0 left-0 w-full  bg-gray-900 text-white transition-transform duration-300 ease-in-out ${isLargeScreen || showFooter ? "translate-y-0" : "translate-y-full"}`}>
+    <footer className={`bottom-0 left-0 w-full  bg-gray-900 text-white transition-transform duration-300 ease-in-out translate-y-0 mt-2`}>
       <Container maxWidth="full" className="py-4 justify-between">
         <Stack direction="row" spacing={4} justifyContent="space-between" alignItems="center">
           <Stack direction="column" spacing={1} >

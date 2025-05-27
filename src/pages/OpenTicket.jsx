@@ -38,7 +38,7 @@ export default function OpenTicket({ user }) {
           align="center"
           className="text-gray-800 font-semibold"
         >
-          Hibajegy megnyitása
+          Írj nekünk egy hibajegyet!
         </Typography>
         {user ? null : (
           <Typography variant="body2" align="center" className="text-gray-600">

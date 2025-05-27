@@ -79,13 +79,13 @@ export default function Admin({ admin, user }) {
               !msg.isAnswered ? (
                 <div key={msg.id} className="mt-4">
                   <Button
+                    sx={{ "text-transform": "none" }}
                     variant="outlined"
                     color="secondary"
                     onClick={() =>
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left", "testTransform" : "none"}}
                   >
                     {msg.cim}
                   </Button>
@@ -152,13 +152,13 @@ export default function Admin({ admin, user }) {
               msg.isAnswered ? (
                 <div key={msg.id} className="mt-4">
                   <Button
+                    sx={{ "text-transform": "none" }}
                     variant="outlined"
                     color="primary"
                     onClick={() =>
                       setOpenMessage(openMessage === msg.id ? null : msg.id)
                     }
                     fullWidth
-                    sx={{ textAlign: "left", "testTransform" : "none" }}
                   >
                     {msg.cim}
                   </Button>

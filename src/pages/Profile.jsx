@@ -7,13 +7,21 @@ import {
   TextField,
   Alert,
   Stack,
+  List,
+  Typography,
+  Box,
+  Paper,
+  Avatar,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
-import { updateProfile, updatePassword } from "firebase/auth";
+import { updateProfile, updatePassword, reauthenticateWithCredential } from "firebase/auth";
 import { Link, Navigate } from "react-router-dom";
 import { uploadFile } from "../Uploadfile";
 import { CloudUpload } from "@mui/icons-material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
+import { EmailAuthProvider } from "firebase/auth/web-extension";
 
 export default function Profile({ user, auth, logout, setUser, admin }) {
   const [profilePicture, setProfilePicture] = useState(
@@ -28,6 +36,8 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
   const [messages, setMessages] = useState([]);
   const [singleMessages, setSingleMessages] = useState([]);
   const [id, setId] = useState("");
+  const [datum, setDatum] = useState("");
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -99,25 +109,50 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
       alert("Túl nagy a fájl (5mb max)");
     }
   };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    const options = { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return new Date(dateString).toLocaleDateString('hu-HU', options);
+  };
+
   async function fioktorles() {
-    await user.delete();
-    console.log("deleted user");
-    logout();
+    if (confirm("Biztos törölni szeretnéd a fiókod?") == true) {
+      await user.delete();
+      console.log("deleted user");
+      logout();
+    }
   }
 
   const SaveChanges = async () => {
     try {
       await updateProfile(auth.currentUser, { displayName: name });
-      alert("Profile updated successfully!");
-
+      
       if (newPassword) {
-        await updatePassword(auth.currentUser, newPassword);
-        alert("Password updated successfully!");
+        const credential = EmailAuthProvider.credential(user.email, currentPassword);
+
+        reauthenticateWithCredential(user, credential)
+          .then(() => {
+            return updatePassword(user, newPassword);
+          })
+          .then(() => {
+            alert("Profilod sikeresen frissítve!");
+          })
+          .catch((error) => {
+            console.error("Error updating password:", error);
+            alert("Valamilyen hiba történt a jelszavad frissítése közben.");
+          });
         logout();
-      }
+      } else alert("Profilod sikeresen frissítve!");
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
+      alert("Valamilyen hiba történt a profilod frissítése közben.");
     }
     setUser((v) => ({ ...v, displayName: name }));
   };
@@ -126,11 +161,9 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
     <>
       {user ? (
         <div
-          className={
-            !admin ? "md:flex m-10 gap-10 block" : "lg:flex m-10 gap-10 block"
-          }
+          className="flex 2xl:m-4 m-4 gap-4 flex-col 2xl:flex-row"
         >
-          <div className="bg-white rounded-2xl mb-10 glowing profileBox">
+          <div className="bg-white rounded-2xl glowing profileBox min-w-fit">
             <div className="p-5 text-2xl">
               <h1>Személyes adataid</h1>
             </div>
@@ -213,108 +246,134 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                   className="w-full mt-2 p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              <Button
-                sx={{ "text-transform": "none" }}
-                className="w-full bg-blue-500 py-2 rounded-lg hover:bg-blue-600 hover:text-white"
-                onClick={SaveChanges}
-              >
-                Változtatások Mentése
-              </Button>
-              <Button
-                className="hover:bg-red-600 bg-red-500 text-white"
-                onClick={fioktorles}
-              >
-                Fiok torlese
-              </Button>
+              <div className="flex flex-row justify-between">
+                <Button
+                  sx={{ "text-transform": "none" }}
+                  className={admin ? "w-full py-2 rounded-lg hover:bg-blue-600 hover:text-white" : "w-3/4 py-2 rounded-lg hover:bg-blue-600 hover:text-white"}
+                  onClick={SaveChanges}
+                >
+                  Változtatások Mentése
+                </Button>
+                {admin ? "" :
+                <Button
+                  sx={{ "text-transform": "none" }}
+                  className="hover:bg-red-600 bg-red-500 hover:text-white"
+                  onClick={fioktorles}
+                >
+                  Fiók törlése
+                </Button>
+                }
+              </div>
+              
             </div>
           </div>
-          <div className="rounded-2xl glowing bg-white flex-grow profileBox relative">
+          <div className="rounded-2xl glowing bg-white flex-grow profileBox relative h-[600px]">
             {!admin ? (
-              <>
+              <div className="h-full flex flex-col">
                 <div className="p-5 text-2xl">Nyitott és lezárt ügyeid</div>
                 <Divider />
-                <div className="p-5 flex items-center justify-between bg-gray-200 mt-5 mb-5">
-                  <Autocomplete
-                    disablePortal
-                    options={messages}
-                    getOptionLabel={(option) =>
-                      option.cim +
-                      " - " +
-                      new Date(option.created_at).toLocaleString()
-                    }
-                    sx={{ width: "100%" }}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Válasz egy ügyet" />
-                    )}
-                    onChange={(event, value) => {
-                      if (value) {
-                        setId(value.id);
-                      }
-                    }}
-                    renderOption={(props, option) => (
-                      <li {...props} key={option.id}>
-                        {option.cim} -{" "}
-                        {new Date(option.created_at).toLocaleString()}
-                      </li>
-                    )}
-                  />
-                </div>
-                <Divider />
-                <div>
-                  {singleMessages.length != 0 ? (
-                    <div className="m-4">
-                      <h1 className="text-2xl mb-5 pb-2 border-gray-500 border-b">
-                        {singleMessages.cim}
-                      </h1>
-                      <div className="relative">
-                        <div className="absolute right-0">
-                          <div className="text-xs text-gray-500 mr-2 text-right">
-                            Ön
-                          </div>
-                          <div className="bg-blue-400 w-fit p-2 rounded-xl">
-                            {singleMessages.uzenet}
-                          </div>
-                        </div>
+                
+                <div className="flex flex-1 overflow-hidden">
+                  {/* Message list */}
+                  <div className="min-w-52 border-r overflow-y-auto">
+                      <List>
+                        {messages.map((message) => (
+                          <ListItem
+                            key={message.id}
+                            onClick={() => {setId(message.id); setDatum(message.created_at)}}
+                            selected={singleMessages?.id === message.id}
+                            sx={{
+                              '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                              cursor: 'pointer'
+                            }}
+                          >
+                            <ListItemText
+                              primary={message.cim}
+                              secondary={formatDate(message.created_at)}
+                              secondaryTypographyProps={{ color: "textSecondary" }}
+                            />
+                          </ListItem>
+                        ))}
+                      </List>
+                  </div>
+                  
+                  {/* Message detail */}
+                  {console.log(singleMessages)}
+                  <div className="p-4 overflow-y-auto">
+                    {singleMessages ? (
+                      <div>
+                        <Typography variant="h5" gutterBottom>
+                          {singleMessages.cim}
+                        </Typography>
+                        <Typography variant="subtitle2" color="textSecondary" gutterBottom>
+                          Beküldve: {formatDate(datum)}
+                        </Typography>
+                        
+                        <Box mt={3} mb={4}>
+                          <Paper elevation={0} sx={{ p: 2, bgcolor: 'primary.light', ml: 'auto' }}>
+                            <Box display="flex" alignItems="flex-start" gap={1}>
+                              <Avatar src={profilePicture} sx={{ width: 32, height: 32 }} />
+                              <Box>
+                                <Typography variant="subtitle2" fontWeight="medium">
+                                  Ön
+                                </Typography>
+                                <Typography variant="body1">
+                                  {singleMessages.uzenet}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          </Paper>
+                        </Box>
+                        
                         {singleMessages.isAnswered ? (
-                          <div className="absolute top-14">
-                            <span className="text-xs text-gray-500 -mb-4 ml-1">
-                              Ügyfélszolgálat
-                            </span>
-                            <span className="bg-gray-500 w-fit block p-2 rounded-xl">
-                              {singleMessages.valasz}
-                            </span>
-                          </div>
+                          <Box mt={4}>
+                            <Paper elevation={0} sx={{ p: 2, bgcolor: 'grey.200' }}>
+                              <Box display="flex" alignItems="flex-start" gap={1}>
+                                <Avatar sx={{ width: 32, height: 32, bgcolor: 'grey.500' }}>Ü</Avatar>
+                                <Box>
+                                  <Typography variant="subtitle2" fontWeight="medium">
+                                    Ügyfélszolgálat
+                                  </Typography>
+                                  <Typography variant="body1">
+                                    {singleMessages.valasz}
+                                  </Typography>
+                                </Box>
+                              </Box>
+                            </Paper>
+                          </Box>
                         ) : (
-                          <div className="absolute top-14 mt-2">
-                            <Alert severity="info">
-                              Ezt az ügyet még nem válaszolták meg!
-                            </Alert>
-                          </div>
+                          <Alert severity="info" sx={{ mt: 2 }}>
+                            Ezt az ügyet még nem válaszolták meg!
+                          </Alert>
                         )}
                       </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                    ) : (
+                      <Box display="flex" height="100%" alignItems="center" justifyContent="center">
+                        <Typography variant="body1" color="textSecondary">
+                          Válassz egy üzenetet a bal oldali listából
+                        </Typography>
+                      </Box>
+                    )}
+                  </div>
                 </div>
-              </>
+              </div>
             ) : (
-              <>
-                <div className="h-max w-max absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <Link to="/admin">
-                    <Button
-                      variant="contained"
-                      sx={{
-                        textTransform: "none",
-                        height: "100px",
-                        fontSize: 15,
-                      }}
-                    >
-                      A Jegyek Menedzseléséhez kattints ide!
-                    </Button>
-                  </Link>
-                </div>
-              </>
+              <Box display="flex" height="100%" alignItems="center" justifyContent="center">
+                <Link to="/admin">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    sx={{
+                      textTransform: 'none',
+                      fontSize: 16,
+                      px: 3,
+                      py: 1.5,
+                    }}
+                  >
+                    A Jegyek Menedzseléséhez kattints ide!
+                  </Button>
+                </Link>
+              </Box>
             )}
           </div>
         </div>
