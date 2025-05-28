@@ -35,12 +35,14 @@ Admins manage incoming tickets on this page. The "/admin" route leads here. If y
 
 The left side of the page lists open tickets awaiting responses. The right side lists already answered tickets. This page showcases heavy usage of Material UI components.
 
-![Admin Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/admin.png)
+![Admin Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/admin1.png)
+![Admin Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/admin2.png)
 
 ### OpenTicket
 In the menu, this page’s button is replaced by an "Admin" button if you're logged in as an admin. The route "/openticket" takes you here. The page has two input fields and a button—one for the title and one for the message. The button submits the form. If the user isn’t logged in, a message is displayed instead.
 
-![OpenTicket Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/openticket.png)
+![OpenTicket Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/openticket1.png)
+![OpenTicket Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/openticket2.png)
 
 ### Login
 If you're already logged in, you're redirected. If not, this is the "/login" page. Normally, logged-in users cannot access this page unless they manually enter the URL, in which case they are redirected. 
@@ -57,8 +59,11 @@ The "/about" page provides a brief description of the functionality of each page
 ### ResetPassword
 In case someone forgets their password, they can generate a new one here. Route: "/forgotpassword"
 
+![About Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/forgotpassword.png)
+
 ### NotFound
 A simple page displayed when an incorrect URL is entered.
+![About Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/notfound.png)
 
 ### Development ideas
 - AI Assistant
