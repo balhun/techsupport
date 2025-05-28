@@ -16,7 +16,7 @@ Website link: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.
 
 ## Documentation by Page:
 ### Home
-A simple homepage. The "/" route leads here. Tailwind is heavily used on this page, including an animated `<h1>`. We aimed to create a professional introduction to attract as many users as possible to our services.
+A simple homepage. The "/" route leads here. Tailwind is heavily used on this page, including an animated main box on the top left. We aimed to create a professional introduction to attract as many users as possible to our services.
 
 ![Home Page Screenshot](https://github.com/balhun/techsupport/blob/master/images/home.png)
 
