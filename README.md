@@ -5,6 +5,8 @@ A simple and intuitive Tech Support platform. :tada:
 
 Website link: [https://techsupport-uzb8.onrender.com/](https://techsupport-uzb8.onrender.com/)
 
+Backend Repository link: [https://github.com/YoSlurP/TechBackend](https://github.com/YoSlurP/TechBackend)
+
 ## Website Features
 - **Registration and Login:** Users can register and log in to access the platform.
 - **Profile Picture Update:** Both users and admins can change their profile pictures for a more personalized experience.
