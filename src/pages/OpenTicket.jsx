@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography, Box, Link } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
 import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-export default function OpenTicket({ user }) {
+export default function OpenTicket({ user, admin }) {
   const [text, setText] = useState("");
   const [cim, setCim] = useState("");
   const [success, setSuccess] = useState(false);
@@ -30,6 +30,17 @@ export default function OpenTicket({ user }) {
     setSuccess(true);
     setTimeout(() => setSuccess(false), 3000);
   }
+
+  useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        if (admin === true) {
+          navigate("/admin");
+        }
+      }, 1000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }, [admin]);
 
   return (
     <div className="flex flex-col items-center justify-center p-4 my-8">

@@ -35,7 +35,6 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid lg:grid-cols-2 gap-8 mb-16">
-        {/* Hero Section */}
         <GradientCard className="flex flex-col justify-between">
           <div>
             <Typography
@@ -85,7 +84,6 @@ export default function Home() {
           </div>
         </GradientCard>
 
-        {/* Why Choose Us */}
         <div className="space-y-6">
           <div className="p-6 bg-white rounded-2xl shadow-lg">
             <Typography variant="h4" className="mb-4 font-bold">
@@ -100,7 +98,7 @@ export default function Home() {
                     Garantált megoldások
                   </h4>
                   <p className="text-gray-600">
-                    Szakértőinkkel 100%-os megoldási arány
+                    Szakértőinkkel 99.9%-os megoldási arány
                   </p>
                 </div>
               </FeatureItem>
@@ -116,8 +114,6 @@ export default function Home() {
               </FeatureItem>
             </div>
           </div>
-
-          {/* Contact Card */}
           <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg">
             <Typography variant="h5" className="mb-4 font-bold">
               Személyre szabott segítség
@@ -146,14 +142,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Features Section */}
       <div className="grid md:grid-cols-3 gap-8 mt-16">
         <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
           <SpeedIcon fontSize="large" color="primary" />
           <h3 className="text-xl font-bold my-4">Azonnali válaszok</h3>
           <p className="text-gray-600">
-            Intelligens chatbotunk azonnali válaszokkal szolgál gyakori
+            Intelligens kollégáink azonnali válaszokkal szolgál gyakori
             kérdésekre
           </p>
         </div>

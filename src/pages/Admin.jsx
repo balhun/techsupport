@@ -181,7 +181,7 @@ export default function Admin({ admin, user }) {
                           Válasz: {msg.valasz}
                         </span>
                       )}
-                      {msg.answerDate && ( //ez etlűnik random
+                      {msg.answerDate && (
                         <span className="mt-2 block">
                           Megválaszolva ekkor:
                           {new Date(msg.answerDate).toLocaleString()}

@@ -190,7 +190,7 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                   >
                     Fájl feltöltése
                     <VisuallyHiddenInput
-                      type="file" // <-- make sure this is set!
+                      type="file" 
                       accept=".png, .jpg, .gif"
                       onChange={ProfilePictureChange}
                       disabled={uploading}
@@ -310,13 +310,19 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                         <Box mt={3} mb={4}>
                           <Paper elevation={0} sx={{ p: 2, bgcolor: 'primary.light', ml: 'auto' }}>
                             <Box display="flex" alignItems="flex-start" gap={1}>
-                              <Avatar src={profilePicture} sx={{ width: 32, height: 32 }} />
                               <Box>
-                                <Typography variant="subtitle2" fontWeight="medium">
-                                  Ön
-                                </Typography>
                                 <Typography variant="body1">
                                   {singleMessages.uzenet}
+                                </Typography>
+                              </Box>
+                              <Box
+                                display="flex"
+                                flexDirection="column"
+                                alignItems="center"
+                              >
+                                <Avatar src={profilePicture} sx={{ width: 32, height: 32 }} />
+                                <Typography variant="subtitle2" fontWeight="medium">
+                                  {user.displayName}
                                 </Typography>
                               </Box>
                             </Box>

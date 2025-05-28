@@ -1,4 +1,4 @@
-import { Stack, TextField, Button, Link, Alert } from "@mui/material";
+import { Stack, TextField, Button, Link, Alert, Divider } from "@mui/material";
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
@@ -15,9 +15,7 @@ import { Google } from "@mui/icons-material";
 export default function Login({
   auth,
   user,
-  logout,
-  //successRegist,
-  //setSuccessRegist,
+  logout
 }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -29,8 +27,6 @@ export default function Login({
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   async function login() {
@@ -54,7 +50,7 @@ export default function Login({
       setErrorMessage("Nem egyezik a két jelszó!");
     } else {
       try {
-        //setSuccessRegist(false);
+        
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           newEmail,
@@ -65,7 +61,7 @@ export default function Login({
             displayName: felhasznalonev,
             photoURL: "./blank-pfp.png",
           });
-          //setSuccessRegist(true);
+          
         });
       } catch (err) {
         if (felhasznalonev.length < 6) {
@@ -95,11 +91,12 @@ export default function Login({
       {!user ? (
         <div className="justify-evenly mt-2 flex flex-col md:flex-row gap-2 md:items-start items-center">
           <form
-            className="island glowing w-fit h-fit flex flex-col gap-4 justify-center items-center p-5 shadow-black"
+            className="island glowing w-fit h-fit flex flex-col justify-center items-center p-5 shadow-black"
           >
-            <h1 className="text-center text-2xl">Jelentkezz be itt!</h1>
+            <h1 className="text-center text-2xl mb-4">Jelentkezz be!</h1>
             <TextField
               className="w-80 align-middle"
+              sx={{marginBottom: 2}}
               required
               data-testid="email-input"
               label="Email"
@@ -118,6 +115,7 @@ export default function Login({
                 setLoginError(false);
               }}
               label="Jelszó"
+              autoComplete="current-password"
             />
 
             {loginError ? (
@@ -127,38 +125,43 @@ export default function Login({
             ) : (
               ""
             )}
-            <Link to="/profile">
-              <Button onClick={login} variant="contained" className="w-80">
-                Bejelentkezés
-              </Button>
-            </Link>
-            <p className="text-gray-500">Vagy jelentkez be így</p>
-            <Button
-              startIcon={<Google />}
-              variant="outlined"
-              onClick={GoogleLogIn}
-              sx={{
-                borderColor: "text.secondary",
-                color: "text.primary",
-                "&:hover": {
-                  borderColor: "primary.main",
-                  color: "primary.main",
-                },
-              }}
-            >
-              Continue with Google
-            </Button>
 
             <Link
               href="/forgotpassword"
               sx={{
-                textAlign: "center",
+                marginBottom: 2,
+                width: "100%",
                 color: "text.secondary",
-                "&:hover": { color: "primary.main" },
+                textDecoration: "None",
+                "&:hover": { color: "primary.main", textDecoration: "None" },
               }}
             >
-              Forgot Password?
+              Elfelejtetted a jelszavad?
             </Link>
+            <Link to="/profile" sx={{marginBottom: 2}} >
+              <Button onClick={login} variant="contained" className="w-80">
+                Bejelentkezés
+              </Button>
+            </Link>
+            <Divider sx={{width: "100%", marginBottom: 1}}><span className="text-gray-500">Vagy jelentkezz be így</span></Divider>
+            <Button
+              startIcon={<Google />}
+              variant="outlined"
+              onClick={GoogleLogIn}
+              className="w-80"
+              sx={{
+                backgroundColor: "primary.main",
+                boxShadow: 1,
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "primary.dark",
+                  boxShadow: 3
+                },
+              }}
+            >
+              Google
+            </Button>
+
           </form>
           <form
             className="glowing island w-fit h-fit flex flex-col justify-center items-center p-5 gap-4"
@@ -194,6 +197,7 @@ export default function Login({
                 setError(false);
               }}
               label="Jelszó"
+              autoComplete="new-password"
             />
             <Passwordshow
               value={confirmPassword}
@@ -203,6 +207,7 @@ export default function Login({
                 setError(false);
               }}
               label="Jelszó megerősítés"
+              autoComplete="new-password"
             />
             <Button variant="contained" className="w-80" onClick={regist}>
               Regisztrálás

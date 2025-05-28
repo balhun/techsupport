@@ -6,10 +6,6 @@ export default function RespFooter() {
   const [showFooter, setShowFooter] = useState(false);
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
- 
-
-  //Mivel a gombok egy Link nem lehet sima tailwindel szerkeszteni. cssben kell.
-
   return (
     <footer className={`bottom-0 left-0 w-full  bg-gray-900 text-white transition-transform duration-300 ease-in-out translate-y-0 mt-2`}>
       <Container maxWidth="full" className="py-4 justify-between">

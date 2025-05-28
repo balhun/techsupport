@@ -4,7 +4,6 @@ import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "/firebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
-//validacio zod
 import Layout from "./Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -27,10 +26,6 @@ function App() {
   const [admin, setAdmin] = useState(false);
   const [unreadMessages, setUnreadMessages] = useState(0);
 
-  /*const [successRegist, setSuccessRegist] = useState(false);
-  useEffect(() => {
-    setTimeout(setSuccessRegist(false), 5000);
-  }, []);*/
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -91,12 +86,10 @@ function App() {
               setUser={setUser}
               user={user}
               logout={logout}
-              //successRegist={successRegist}
-              //setSuccessRegist={setSuccessRegist}
             />
           ),
         },
-        { path: "/openticket", element: <OpenTicket user={user} /> },
+        { path: "/openticket", element: <OpenTicket user={user} admin={admin} /> },
         {
           path: "/profile",
           element: (
