@@ -1,5 +1,5 @@
 
-# [Tech Support](https://techsupport-uzb8.onrender.com/) – Under Development
+# [Tech Support](https://techsupport-uzb8.onrender.com/)
 
 A simple and intuitive Tech Support platform. :tada:
 
