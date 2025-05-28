@@ -69,4 +69,4 @@ A simple page displayed when an incorrect URL is entered.
 - AI Assistant
 - Image upload to help
 - Extending help and not just about technology
--Better security
+- Better security
