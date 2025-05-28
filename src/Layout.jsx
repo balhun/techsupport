@@ -1,4 +1,3 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 import RespMenu from "./pages/RespMenu.jsx";
 import RespFooter from './pages/RespFooter.jsx';

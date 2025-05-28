@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Typography, Box, Link } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/backEnd";
 import { useNavigate } from "react-router-dom";

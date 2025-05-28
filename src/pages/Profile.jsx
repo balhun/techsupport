@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   styled,
   Divider,
-  Autocomplete,
-  TextField,
   Alert,
-  Stack,
   List,
   Typography,
   Box,
@@ -298,7 +295,7 @@ export default function Profile({ user, auth, logout, setUser, admin }) {
                   </div>
                 
                   <div className="p-4 overflow-y-auto">
-                    {messages.length > 0 ? (
+                    {id != "" ? (
                       <div>
                         <Typography variant="h5" gutterBottom>
                           {singleMessages.cim}

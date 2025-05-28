@@ -1,7 +1,6 @@
 import { VisibilityOff } from '@mui/icons-material';
 import { Visibility } from '@mui/icons-material';
-import { FilledInput, FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
-import React from 'react'
+import { FilledInput, FormControl, IconButton, Input, InputAdornment, InputLabel, } from '@mui/material';
 import { useState } from 'react';
 
 export default function Passwordshow({value,onChange,label,testId}) {

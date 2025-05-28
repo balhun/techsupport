@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, TextField, Stack } from "@mui/material";
 import { sendPasswordResetEmail } from "firebase/auth";
 

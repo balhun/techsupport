@@ -1,5 +1,5 @@
-import { Stack, TextField, Button, Link, Alert, Divider } from "@mui/material";
-import React, { useState } from "react";
+import { TextField, Button, Link, Alert, Divider } from "@mui/material";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -15,7 +15,6 @@ import { Google } from "@mui/icons-material";
 export default function Login({
   auth,
   user,
-  logout
 }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");

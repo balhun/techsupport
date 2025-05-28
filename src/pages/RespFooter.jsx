@@ -1,9 +1,7 @@
 import { Container, Stack, Typography, Link, useMediaQuery } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { useState, useEffect } from "react";
 
 export default function RespFooter() {
-  const [showFooter, setShowFooter] = useState(false);
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
   return (

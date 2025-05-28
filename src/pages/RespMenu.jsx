@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -12,11 +12,8 @@ import {
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import SupportIcon from "@mui/icons-material/Support";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import axios from "axios";
-import { BACKEND_URL } from "../constants/backEnd";
 
 export default function RespMenu({ user, admin, logout, unreadMessages }) {
   const { pathname } = useLocation();
